@@ -1,9 +1,8 @@
-asgiref==3.11.1
+-r backend/requirements.txt
+
+# Dev tools
 black==26.1.0
 click==8.3.1
-Django==6.0.2
-django-cors-headers==4.9.0
-djangorestframework==3.16.1
 flake8==7.3.0
 mccabe==0.7.0
 mypy_extensions==1.1.0
@@ -12,5 +11,3 @@ pathspec==1.0.4
 platformdirs==4.9.2
 pycodestyle==2.14.0
 pyflakes==3.4.0
-pytokens==0.4.1
-sqlparse==0.5.5
