@@ -3,3 +3,23 @@ Django==6.0.2
 django-cors-headers==4.9.0
 djangorestframework==3.16.1
 sqlparse==0.5.5
+
+# JWT Auth
+djangorestframework-simplejwt==5.5.1
+
+# Social Auth (Google, Apple)
+django-allauth==65.14.3
+dj-rest-auth==7.1.1
+cryptography==44.0.2
+
+# Filtering
+django-filter==25.2
+
+# Images
+Pillow==11.1.0
+
+# Environment variables
+django-environ==0.13.0
+
+# HTTP requests (weather API)
+requests==2.32.3
