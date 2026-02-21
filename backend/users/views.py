@@ -1,5 +1,6 @@
 from decimal import Decimal
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer, UserStatsSerializer
 
@@ -20,7 +21,9 @@ class UserStatsView(generics.GenericAPIView):
         from routes.models import UserRoute
 
         user_routes = UserRoute.objects.filter(user=request.user)
-        completed = user_routes.filter(status=UserRoute.Status.COMPLETED)
+        completed = user_routes.filter(
+            status=UserRoute.Status.COMPLETED
+        ).select_related("route")
 
         total_time = sum(
             ur.route.estimated_duration for ur in completed
@@ -36,4 +39,4 @@ class UserStatsView(generics.GenericAPIView):
             "total_budget": total_budget,
         }
         serializer = self.get_serializer(data)
-        return generics.Response(serializer.data)
+        return Response(serializer.data)
