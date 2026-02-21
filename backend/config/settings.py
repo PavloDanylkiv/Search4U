@@ -5,7 +5,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, True),
+    DEBUG=(bool, False),
 )
 environ.Env.read_env(BASE_DIR / ".env")
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "dj_rest_auth",
     "dj_rest_auth.registration",
+    "rest_framework_simplejwt.token_blacklist",
     # Local
     "users",
     "routes",
