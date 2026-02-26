@@ -7,6 +7,9 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={
+            <ProtectedRoute><MainPage /></ProtectedRoute>
+          } />
           <Route path="/account" element={
             <ProtectedRoute><AccountPage /></ProtectedRoute>
           } />
