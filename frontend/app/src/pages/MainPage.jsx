@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react' // standart react libriaries
+import { Link } from 'react-router-dom' // travel between pages
 import { Menu, Briefcase, Hourglass, MapPin } from 'lucide-react'
-import L from 'leaflet'
+import L from 'leaflet' // map
 import 'leaflet/dist/leaflet.css'
 import { tileLayerOffline, downloadTile, saveTile, getStorageLength } from 'leaflet.offline'
 import { useAuth } from '../context/AuthContext.jsx'
@@ -17,10 +17,10 @@ const BUDGET_MAP = {
 }
 
 const TIME_MAP = {
-  '1 Hour': { duration__lte: 90 },
-  'Half Day': { duration__lte: 240 },
-  'Full Day': { duration__lte: 480 },
-}
+  '1 Hour': { duration__lte: 60 },    // 1 hour
+  'Half Day': { duration__lte: 240 }, // 4 hours
+  'Full Day': { duration__lte: 480 }, // 8 hours
+}                                     // sorry, no more options
 
 const DESTINATION_MAP = {
   Parks: { category: 'parks' },
@@ -36,7 +36,7 @@ const LVIV_BOUNDS = L.latLngBounds([[49.77, 23.92], [49.90, 24.15]])
 const OFFLINE_ZOOMS = [12, 13, 14, 15]
 const TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
-// маршрути
+// path creator
 async function fetchOsrmRoute(waypoints) {
   const coords = waypoints
     .map((pt) => `${parseFloat(pt.longitude)},${parseFloat(pt.latitude)}`)
@@ -62,10 +62,10 @@ function distanceKm(lat1, lng1, lat2, lng2) {
     Math.cos(lat1 * Math.PI / 180) *
     Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLng / 2) ** 2
-  return R * 2 * Math.asin(Math.sqrt(a))
+  return R * 2 * Math.asin(Math.sqrt(a)) // cool formula to calculate distances on Earth (if its not flat overall)
 }
 
-// find nearest index
+// find nearest point from path and returns it's index
 function nearestPointIdx(startLat, startLng, points) {
   let minDist = Infinity
   let minIdx = 0
@@ -113,7 +113,7 @@ export default function MainPage() {
 
     const map = L.map(mapRef.current).setView(DEFAULT_CENTER, DEFAULT_ZOOM)
 
-    const offlineLayer = tileLayerOffline(TILE_URL, {
+    const offlineLayer = tileLayerOffline(TILE_URL, { // looks if map is already saved
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18,
     })
@@ -125,7 +125,7 @@ export default function MainPage() {
       if (count > 0) setOfflineStatus('done')
     })
 
-    map.on('click', (e) => {
+    map.on('click', (e) => { // creates start marker
       const { lat, lng } = e.latlng
 
       if (startMarkerRef.current) {
@@ -352,7 +352,7 @@ export default function MainPage() {
 
   const handleSaveOffline = async () => {
     const layer = tileLayerRef.current
-    const map   = leafletRef.current
+    const map = leafletRef.current
     if (!layer || !map) return
 
     setOfflineStatus('downloading')
