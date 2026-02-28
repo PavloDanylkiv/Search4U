@@ -1,0 +1,258 @@
+[
+  {
+    "model": "routes.route",
+    "pk": 59,
+    "fields": {
+      "name": "Ексклюзивний музей-бункер",
+      "description": "Авантюрна VIP-екскурсія до закритого підземного музею Cold War з приватним гідом. Справжні артефакти, автентична атмосфера — за окремим записом.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "museums",
+      "estimated_duration": 80,
+      "budget_min": "150.00",
+      "budget_max": "280.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 159,
+    "fields": { "route": 59, "name": "Вхід у бункер", "description": "Секретний вхід до підземного комплексу.", "latitude": "49.8400", "longitude": "24.0250", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 160,
+    "fields": { "route": 59, "name": "Зал зброї та артефактів", "description": "Унікальна колекція часів холодної війни.", "latitude": "49.8398", "longitude": "24.0252", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 161,
+    "fields": { "route": 59, "name": "Командний пункт", "description": "Відновлений командний пункт 1950-х рр.", "latitude": "49.8396", "longitude": "24.0255", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 60,
+    "fields": {
+      "name": "Безкоштовні галереї Личакова",
+      "description": "Авантюрне дослідження безкоштовних вуличних галерей та відкритих дворів-музеїв у Личаківському кварталі. Мистецтво без квитка.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "museums",
+      "estimated_duration": 75,
+      "budget_min": "0.00",
+      "budget_max": "20.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 162,
+    "fields": { "route": 60, "name": "Відкрита галерея на Личаківській", "description": "Безкоштовна галерея під відкритим небом.", "latitude": "49.8330", "longitude": "24.0430", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 163,
+    "fields": { "route": 60, "name": "Двір з фресками", "description": "Прихований двір з авангардними фресками на стінах.", "latitude": "49.8325", "longitude": "24.0440", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 164,
+    "fields": { "route": 60, "name": "Фотогалерея у під'їзді", "description": "Незвичайна галерея у відреставрованому під'їзді.", "latitude": "49.8318", "longitude": "24.0455", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 61,
+    "fields": {
+      "name": "Кава з видом на стадіон",
+      "description": "Авантюрна кавова зупинка поряд зі стадіоном — місця, де збираються фанати та пити найдешевшу каву міста.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "cafes",
+      "estimated_duration": 45,
+      "budget_min": "10.00",
+      "budget_max": "35.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 165,
+    "fields": { "route": 61, "name": "Кіоск біля стадіону УФК", "description": "Найбюджетніша кава для вболівальників.", "latitude": "49.8218", "longitude": "24.0050", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 166,
+    "fields": { "route": 61, "name": "Сквер біля Арени", "description": "Зустрічне місце фанатів перед матчами.", "latitude": "49.8210", "longitude": "24.0060", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 167,
+    "fields": { "route": 61, "name": "Фастфуд-куточок", "description": "Класичні хот-доги та пиво після гри.", "latitude": "49.8205", "longitude": "24.0055", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 62,
+    "fields": {
+      "name": "Extreme Львів — VIP пригоди",
+      "description": "Преміум авантюрний день: квест у лісі, верхова їзда та zip-line над горбами. Для тих хто шукає адреналін без обмежень бюджету.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "parks",
+      "estimated_duration": 300,
+      "budget_min": "500.00",
+      "budget_max": "1200.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 168,
+    "fields": { "route": 62, "name": "Парк активного відпочинку «Адреналін»", "description": "Zip-line, скелеодром та мотузковий парк.", "latitude": "49.7900", "longitude": "23.9800", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 169,
+    "fields": { "route": 62, "name": "Кінний клуб «Львівський»", "description": "VIP верхова їзда у передмісті.", "latitude": "49.7850", "longitude": "23.9750", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 170,
+    "fields": { "route": 62, "name": "Лісовий квест", "description": "Командний квест у реальному лісі з координатами.", "latitude": "49.7820", "longitude": "23.9700", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 63,
+    "fields": {
+      "name": "Авантюрний вечір у місті",
+      "description": "Дорога нічна авантюра: ексклюзивний клуб, приватна вечірка та панорамний ресторан на даху. Без обмежень бюджету.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "mixed",
+      "estimated_duration": 240,
+      "budget_min": "300.00",
+      "budget_max": "800.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 171,
+    "fields": { "route": 63, "name": "Ресторан на даху «Sky Lviv»", "description": "Панорамний ресторан з видом на все місто.", "latitude": "49.8440", "longitude": "24.0260", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 172,
+    "fields": { "route": 63, "name": "Приватний клуб «Neon»", "description": "Закритий клуб для членів з ексклюзивними вечірками.", "latitude": "49.8415", "longitude": "24.0270", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 173,
+    "fields": { "route": 63, "name": "Нічний тур на авто", "description": "Приватне авто з гідом по нічному Львову.", "latitude": "49.8430", "longitude": "24.0290", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 64,
+    "fields": {
+      "name": "Спокійний музей з преміум-квитком",
+      "description": "Повільне занурення у колекцію Картинної галереї зі спокійним приватним туром та кавою в атмосферному буфеті музею.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "museums",
+      "estimated_duration": 120,
+      "budget_min": "150.00",
+      "budget_max": "300.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 174,
+    "fields": { "route": 64, "name": "Картинна галерея Львова", "description": "Приватний тур найкращою галереєю міста.", "latitude": "49.8435", "longitude": "24.0225", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 175,
+    "fields": { "route": 64, "name": "Буфет-кав'ярня музею", "description": "Атмосферна кав'ярня всередині галереї.", "latitude": "49.8433", "longitude": "24.0228", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 176,
+    "fields": { "route": 64, "name": "Сувенірна лавка", "description": "Ексклюзивні репродукції та авторські сувеніри.", "latitude": "49.8430", "longitude": "24.0230", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 65,
+    "fields": {
+      "name": "Бюджетна кав'ярня-дослідження",
+      "description": "Допитливий маршрут трьома маленькими авторськими кав'ярнями де кава коштує менше 40 грн. Справжній смак міста без зайвих витрат.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "cafes",
+      "estimated_duration": 90,
+      "budget_min": "20.00",
+      "budget_max": "45.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 177,
+    "fields": { "route": 65, "name": "Мікро-кав'ярня «Зерно»", "description": "Найменша кав'ярня міста — 4 місця, ідеальний еспресо.", "latitude": "49.8395", "longitude": "24.0315", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 178,
+    "fields": { "route": 65, "name": "Студентська кав'ярня при університеті", "description": "Дешева кава для студентів — доступна всім.", "latitude": "49.8350", "longitude": "24.0350", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 179,
+    "fields": { "route": 65, "name": "Кав'ярня-невидимка на подвір'ї", "description": "Таємна кав'ярня без вивіски у внутрішньому дворі.", "latitude": "49.8410", "longitude": "24.0330", "order": 3 }
+  },
+  {
+    "model": "routes.route",
+    "pk": 66,
+    "fields": {
+      "name": "Ботанічний сад VIP-тур",
+      "description": "Допитливе дослідження Ботанічного саду Львова з приватним екскурсоводом-ботаніком. Закриті оранжереї, рідкісні тропічні колекції, наукові лабораторії.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "parks",
+      "estimated_duration": 150,
+      "budget_min": "200.00",
+      "budget_max": "450.00",
+      "avg_rating": "0.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 180,
+    "fields": { "route": 66, "name": "Ботанічний сад ЛНУ", "description": "Університетський ботанічний сад з унікальними колекціями.", "latitude": "49.8295", "longitude": "24.0385", "order": 1 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 181,
+    "fields": { "route": 66, "name": "Закрита тропічна оранжерея", "description": "Прохід до закритої оранжереї для VIP-відвідувачів.", "latitude": "49.8292", "longitude": "24.0390", "order": 2 }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 182,
+    "fields": { "route": 66, "name": "Наукова лабораторія", "description": "Ознайомча екскурсія до ботанічної лабораторії.", "latitude": "49.8290", "longitude": "24.0395", "order": 3 }
+  }
+]

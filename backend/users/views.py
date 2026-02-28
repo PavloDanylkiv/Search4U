@@ -23,13 +23,14 @@ class UserStatsView(generics.GenericAPIView):
         user_routes = UserRoute.objects.filter(user=request.user)
         completed = user_routes.filter(
             status=UserRoute.Status.COMPLETED
-        ).select_related("route")
+        )
+        all_saved = user_routes.select_related("route")
 
         total_time = sum(
-            ur.route.estimated_duration for ur in completed
+            ur.route.estimated_duration for ur in all_saved
         )
         total_budget = sum(
-            ur.route.budget_max or Decimal("0") for ur in completed
+            ur.route.budget_max or Decimal("0") for ur in all_saved
         )
 
         data = {

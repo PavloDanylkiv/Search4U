@@ -19,7 +19,7 @@ class RouteListView(generics.ListAPIView):
     Search:  ?search=...
     Order:   ?ordering=avg_rating
     """
-    queryset = Route.objects.prefetch_related("images", "user_routes")
+    queryset = Route.objects.prefetch_related("images", "user_routes", "points")
     serializer_class = RouteListSerializer
     filterset_class = RouteFilter
     search_fields = ("name", "city", "description")

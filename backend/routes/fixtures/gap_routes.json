@@ -1,0 +1,691 @@
+[
+  {
+    "model": "routes.route",
+    "pk": 46,
+    "fields": {
+      "name": "Вуличний арт-тур",
+      "description": "Пошук вуличного мистецтва та графіті у занедбаних кварталах Львова. Авантюрна прогулянка нетуристичними місцями з несподіваними знахідками.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "mixed",
+      "estimated_duration": 90,
+      "budget_min": "0.00",
+      "budget_max": "30.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 120,
+    "fields": {
+      "route": 46,
+      "name": "Стартова точка — Городоцька",
+      "description": "Початок маршруту на жвавій вулиці зі старою архітектурою.",
+      "latitude": "49.8350",
+      "longitude": "24.0190",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 121,
+    "fields": {
+      "route": 46,
+      "name": "Мурал на Підзамче",
+      "description": "Великий мурал місцевого художника на стіні промислової будівлі.",
+      "latitude": "49.8420",
+      "longitude": "24.0130",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 122,
+    "fields": {
+      "route": 46,
+      "name": "Графіті-провулок",
+      "description": "Вузький провулок, повністю вкритий вуличним мистецтвом.",
+      "latitude": "49.8440",
+      "longitude": "24.0150",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 47,
+    "fields": {
+      "name": "Пивний квест Підзамче",
+      "description": "Авантюрне дослідження пивних барів та крафтових місць у неформальному районі Підзамче. Живий Львів без туристичних маршрутів.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "cafes",
+      "estimated_duration": 120,
+      "budget_min": "50.00",
+      "budget_max": "150.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 123,
+    "fields": {
+      "route": 47,
+      "name": "Крафтова броварня на Підзамче",
+      "description": "Незалежна міні-броварня з авторськими сортами пива.",
+      "latitude": "49.8430",
+      "longitude": "24.0120",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 124,
+    "fields": {
+      "route": 47,
+      "name": "Бар «Dzyga»",
+      "description": "Легендарний неформальний бар з живою музикою та місцевим пивом.",
+      "latitude": "49.8420",
+      "longitude": "24.0260",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 125,
+    "fields": {
+      "route": 47,
+      "name": "Таверна «Під Синьою Пляшкою»",
+      "description": "Старовинна корчма з домашнім пивом та закусками.",
+      "latitude": "49.8410",
+      "longitude": "24.0250",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 48,
+    "fields": {
+      "name": "Нічний Підзамче",
+      "description": "Авантюрна нічна прогулянка промисловим районом Підзамче. Занедбані заводи, стріт-арт та неформальні бари — справжній дух андеграундного Львова.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "mixed",
+      "estimated_duration": 150,
+      "budget_min": "30.00",
+      "budget_max": "80.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 126,
+    "fields": {
+      "route": 48,
+      "name": "Жовківська брама",
+      "description": "Стародавня брама — вхід у район Підзамче.",
+      "latitude": "49.8470",
+      "longitude": "24.0200",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 127,
+    "fields": {
+      "route": 48,
+      "name": "Залізничні ремонтні майстерні",
+      "description": "Промислова архітектура XIX ст., частково покрита муралами.",
+      "latitude": "49.8490",
+      "longitude": "24.0170",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 128,
+    "fields": {
+      "route": 48,
+      "name": "Нічний бар «Лівий Берег»",
+      "description": "Андеграундний бар з живою музикою після 22:00.",
+      "latitude": "49.8460",
+      "longitude": "24.0180",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 49,
+    "fields": {
+      "name": "Альтернативний Личаків",
+      "description": "Авантюрне дослідження нетуристичних куточків Личаківського кварталу: дворики, невідомі каплиці та занедбані вілли.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "museums",
+      "estimated_duration": 100,
+      "budget_min": "20.00",
+      "budget_max": "60.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 129,
+    "fields": {
+      "route": 49,
+      "name": "Будинок-музей Івана Франка",
+      "description": "Маловідомий музей у будинку де мешкав класик.",
+      "latitude": "49.8320",
+      "longitude": "24.0420",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 130,
+    "fields": {
+      "route": 49,
+      "name": "Таємний двір Личаківської",
+      "description": "Прихований двір зі старовинними фресками та галереєю.",
+      "latitude": "49.8310",
+      "longitude": "24.0450",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 131,
+    "fields": {
+      "route": 49,
+      "name": "Музей лікарських рослин",
+      "description": "Невеликий специфічний музей з гербаріями та колекціями.",
+      "latitude": "49.8300",
+      "longitude": "24.0470",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 50,
+    "fields": {
+      "name": "Бункери і підземелля",
+      "description": "Авантюрна екскурсія до підземних укриттів, бункерів часів Другої світової та середньовічних підвалів Львова.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "museums",
+      "estimated_duration": 120,
+      "budget_min": "40.00",
+      "budget_max": "100.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 132,
+    "fields": {
+      "route": 50,
+      "name": "Підземна Ратуша",
+      "description": "Підземні льохи під Ратушею, де зберігали зерно в середні віки.",
+      "latitude": "49.8419",
+      "longitude": "24.0314",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 133,
+    "fields": {
+      "route": 50,
+      "name": "Бункер штаб-квартири НКВС",
+      "description": "Секретне підземне укриття радянської спецслужби.",
+      "latitude": "49.8390",
+      "longitude": "24.0280",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 134,
+    "fields": {
+      "route": 50,
+      "name": "Катакомби домініканського монастиря",
+      "description": "Підземні ходи під колишнім монастирем, нині церква.",
+      "latitude": "49.8425",
+      "longitude": "24.0295",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 51,
+    "fields": {
+      "name": "Стрітфуд-забіг",
+      "description": "Авантюрне гастро-змагання: спробувати якнайбільше видів вуличної їжі за два години. Від Ринку до Привокзального ринку.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "cafes",
+      "estimated_duration": 90,
+      "budget_min": "80.00",
+      "budget_max": "200.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 135,
+    "fields": {
+      "route": 51,
+      "name": "Стрітфуд на Ринку",
+      "description": "Лангоші, паляниці та інші вуличні закуски на площі.",
+      "latitude": "49.8419",
+      "longitude": "24.0316",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 136,
+    "fields": {
+      "route": 51,
+      "name": "Краківський ринок",
+      "description": "Народний ринок з домашньою їжею та смаженим м'ясом.",
+      "latitude": "49.8395",
+      "longitude": "24.0330",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 137,
+    "fields": {
+      "route": 51,
+      "name": "Привокзальний ринок",
+      "description": "Фінал забігу: хот-доги та пирожки біля вокзалу.",
+      "latitude": "49.8407",
+      "longitude": "23.9990",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 52,
+    "fields": {
+      "name": "Парк Залізна Вода",
+      "description": "Дослідження маловідомого парку Залізна Вода — унікального місця з мінеральними джерелами. Ідеально для допитливих, хто хоче відкрити щось нове.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "parks",
+      "estimated_duration": 60,
+      "budget_min": "0.00",
+      "budget_max": "20.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 138,
+    "fields": {
+      "route": 52,
+      "name": "Мінеральне джерело",
+      "description": "Природне джерело залізистої мінеральної води, відоме з XIX ст.",
+      "latitude": "49.8250",
+      "longitude": "24.0050",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 139,
+    "fields": {
+      "route": 52,
+      "name": "Альтанка-оглядовий майданчик",
+      "description": "Старовинна альтанка з видом на ліс і ставок.",
+      "latitude": "49.8240",
+      "longitude": "24.0060",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 140,
+    "fields": {
+      "route": 52,
+      "name": "Ставок з качками",
+      "description": "Тихий ставок у лісовому оточенні — місце для відпочинку.",
+      "latitude": "49.8235",
+      "longitude": "24.0070",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 53,
+    "fields": {
+      "name": "Парк Знесіння",
+      "description": "Цікаве дослідження найбільшого природного парку Львова. Скелі, озера та ботанічна різноманітність — справжнє природниче відкриття.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "parks",
+      "estimated_duration": 90,
+      "budget_min": "10.00",
+      "budget_max": "30.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 141,
+    "fields": {
+      "route": 53,
+      "name": "Скелі Знесіння",
+      "description": "Унікальні вапнякові скелі з рідкісними рослинами.",
+      "latitude": "49.8195",
+      "longitude": "24.0580",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 142,
+    "fields": {
+      "route": 53,
+      "name": "Озеро Знесіння",
+      "description": "Лісове озеро з чистою водою та цікавою орнітофауною.",
+      "latitude": "49.8185",
+      "longitude": "24.0600",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 143,
+    "fields": {
+      "route": 53,
+      "name": "Ботанічна стежка",
+      "description": "Спеціальна стежка з таблицями про рідкісні рослини парку.",
+      "latitude": "49.8190",
+      "longitude": "24.0615",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 54,
+    "fields": {
+      "name": "Еко-стежка Погулянка",
+      "description": "Маловідомий ліс-парк Погулянка з цікавими природними об'єктами. Місце де городяни медитують та займаються скандинавською ходьбою.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "parks",
+      "estimated_duration": 80,
+      "budget_min": "0.00",
+      "budget_max": "15.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 144,
+    "fields": {
+      "route": 54,
+      "name": "Вхід у ліс Погулянка",
+      "description": "Початок лісової стежки з інформаційним щитом.",
+      "latitude": "49.8520",
+      "longitude": "24.0530",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 145,
+    "fields": {
+      "route": 54,
+      "name": "Таємна галявина",
+      "description": "Затишна галявина, де місцеві проводять пікніки.",
+      "latitude": "49.8535",
+      "longitude": "24.0545",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 146,
+    "fields": {
+      "route": 54,
+      "name": "Оглядовий горб",
+      "description": "Невисокий горб з краєвидом на частину міста.",
+      "latitude": "49.8548",
+      "longitude": "24.0555",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 55,
+    "fields": {
+      "name": "Вареники і ринок",
+      "description": "Спокійна прогулянка з дегустацією вареників та свіжих продуктів на Краківському ринку. Бюджетний смак справжнього Львова.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "cafes",
+      "estimated_duration": 60,
+      "budget_min": "20.00",
+      "budget_max": "45.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 147,
+    "fields": {
+      "route": 55,
+      "name": "Краківський ринок",
+      "description": "Автентичний народний ринок з домашньою їжею.",
+      "latitude": "49.8395",
+      "longitude": "24.0330",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 148,
+    "fields": {
+      "route": 55,
+      "name": "Вареничня «Центральна»",
+      "description": "Проста вареничня з домашніми варениками за доступними цінами.",
+      "latitude": "49.8400",
+      "longitude": "24.0310",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 149,
+    "fields": {
+      "route": 55,
+      "name": "Пекарня на Шпитальній",
+      "description": "Бюджетна пекарня з гарячими виробами та узваром.",
+      "latitude": "49.8408",
+      "longitude": "24.0295",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 56,
+    "fields": {
+      "name": "Кава на виніс",
+      "description": "Спокійна прогулянка трьома найкращими кав'ярнями-невидимками з кавою на виніс. Ідеально для тих хто хоче насолодитися містом без зайвих витрат.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "cafes",
+      "estimated_duration": 45,
+      "budget_min": "15.00",
+      "budget_max": "40.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 150,
+    "fields": {
+      "route": 56,
+      "name": "Кав'ярня «Мала Чорна»",
+      "description": "Маленька спеціалті-кав'ярня з еспресо на виніс.",
+      "latitude": "49.8415",
+      "longitude": "24.0305",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 151,
+    "fields": {
+      "route": 56,
+      "name": "Набережна Пелтева",
+      "description": "Тихе місце де можна випити каву та помилуватися видом.",
+      "latitude": "49.8440",
+      "longitude": "24.0200",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 152,
+    "fields": {
+      "route": 56,
+      "name": "Кав'ярня у Середмісті",
+      "description": "Фінальна зупинка — кава з краєм свіжого медовика.",
+      "latitude": "49.8430",
+      "longitude": "24.0280",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 57,
+    "fields": {
+      "name": "Палац Потоцьких VIP-тур",
+      "description": "Ексклюзивна екскурсія до Палацу Потоцьких з доступом до закритих залів та приватних колекцій. Для справжніх цінителів мистецтва з необмеженим бюджетом.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "estimated_duration": 120,
+      "budget_min": "150.00",
+      "budget_max": "350.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 153,
+    "fields": {
+      "route": 57,
+      "name": "Палац Потоцьких",
+      "description": "Розкішний палац у стилі класицизму, нині художній музей.",
+      "latitude": "49.8388",
+      "longitude": "24.0355",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 154,
+    "fields": {
+      "route": 57,
+      "name": "Приватна галерея «Арт-Вілла»",
+      "description": "Ексклюзивна галерея з приватними колекціями. Тільки за попереднім записом.",
+      "latitude": "49.8380",
+      "longitude": "24.0370",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 155,
+    "fields": {
+      "route": 57,
+      "name": "VIP дегустація у художньому кафе",
+      "description": "Завершення туру з кавою та тістечками в атмосферному кафе при музеї.",
+      "latitude": "49.8392",
+      "longitude": "24.0360",
+      "order": 3
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 58,
+    "fields": {
+      "name": "Золоті колекції НМЛ",
+      "description": "Глибоке занурення у найцінніші колекції Національного музею Львова. Допитливий погляд на справжні скарби: іконопис, середньовічні артефакти та авангард.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "estimated_duration": 90,
+      "budget_min": "100.00",
+      "budget_max": "250.00",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "avg_rating": "0.00"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 156,
+    "fields": {
+      "route": 58,
+      "name": "Національний музей Львова",
+      "description": "Головна будівля з колекцією українського мистецтва.",
+      "latitude": "49.8432",
+      "longitude": "24.0232",
+      "order": 1
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 157,
+    "fields": {
+      "route": 58,
+      "name": "Зала іконопису",
+      "description": "Унікальна колекція українських ікон X–XVIII ст.",
+      "latitude": "49.8432",
+      "longitude": "24.0232",
+      "order": 2
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 158,
+    "fields": {
+      "route": 58,
+      "name": "Зала авангарду",
+      "description": "Рідкісні роботи українських авангардистів 1920-х років.",
+      "latitude": "49.8432",
+      "longitude": "24.0232",
+      "order": 3
+    }
+  }
+]
