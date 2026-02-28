@@ -1,0 +1,977 @@
+[
+  {
+    "model": "routes.route",
+    "pk": 1,
+    "fields": {
+      "name": "Центр міста",
+      "description": "Спокійна прогулянка через історичний центр Львова. Ринкова площа, старовинні церкви та Аптека-музей — ідеально для неспішного знайомства з містом.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "mixed",
+      "budget_min": "20.00",
+      "budget_max": "50.00",
+      "estimated_duration": 90,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-01T10:00:00Z",
+      "updated_at": "2026-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 2,
+    "fields": {
+      "name": "Парки та природа",
+      "description": "Активний маршрут через найкрасивіші парки Львова. Залізна Вода, Стрийський парк і Ботанічний сад подарують свіже повітря та природу в серці міста.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "parks",
+      "budget_min": "0.00",
+      "budget_max": "20.00",
+      "estimated_duration": 180,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-01T11:00:00Z",
+      "updated_at": "2026-01-01T11:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 3,
+    "fields": {
+      "name": "Кав'ярні та культура",
+      "description": "Цікавий маршрут для допитливих: Оперний театр, Арсенал та парк Івана Франка з зупинками у найстаріших львівських кав'ярнях.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "cafes",
+      "budget_min": "50.00",
+      "budget_max": "120.00",
+      "estimated_duration": 120,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-01T12:00:00Z",
+      "updated_at": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 4,
+    "fields": {
+      "name": "Личаківський некрополь",
+      "description": "Похід до найвідомішого цвинтаря України — пантеону видатних львів'ян. Тихі алеї, скульптури та унікальна архітектура 19 ст.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "budget_min": "20.00",
+      "budget_max": "40.00",
+      "estimated_duration": 100,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-02T09:00:00Z",
+      "updated_at": "2026-01-02T09:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 5,
+    "fields": {
+      "name": "Музейний Львів",
+      "description": "Три найкращі музеї міста за один день: Національний музей ім. Шептицького, Природничий музей і Музей етнографії та художнього промислу.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "budget_min": "60.00",
+      "budget_max": "150.00",
+      "estimated_duration": 150,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-02T10:00:00Z",
+      "updated_at": "2026-01-02T10:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 6,
+    "fields": {
+      "name": "Кавовий маршрут",
+      "description": "Найвідоміші кав'ярні Львова одним маршрутом: Lviv Coffee Mine, 1 Кава, Дзиґа. Дегустація кави, атмосфера та бесіди.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "cafes",
+      "budget_min": "80.00",
+      "budget_max": "200.00",
+      "estimated_duration": 90,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-02T11:00:00Z",
+      "updated_at": "2026-01-02T11:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 7,
+    "fields": {
+      "name": "Замкова гора і Цитадель",
+      "description": "Підйом на Замкову гору з панорамним видом на Львів, а потім прогулянка до Цитаделі — найвищої точки міста. Чудовий маршрут для активних.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "parks",
+      "budget_min": "10.00",
+      "budget_max": "30.00",
+      "estimated_duration": 120,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-02T12:00:00Z",
+      "updated_at": "2026-01-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 8,
+    "fields": {
+      "name": "Стрітфуд та ринок",
+      "description": "Смачна прогулянка: ринкова площа, краківський базар та вірменська вулиця. Пробуємо галицькі пироги, ковбаски та медівники.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "cafes",
+      "budget_min": "30.00",
+      "budget_max": "80.00",
+      "estimated_duration": 90,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-03T09:00:00Z",
+      "updated_at": "2026-01-03T09:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 9,
+    "fields": {
+      "name": "Стрийський парк і Ботсад",
+      "description": "Один з найдовших зелених маршрутів: від Стрийського парку до Ботанічного саду ЛНУ. Ідеально для прогулянок з дітьми або після роботи.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "parks",
+      "budget_min": "0.00",
+      "budget_max": "15.00",
+      "estimated_duration": 150,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-03T10:00:00Z",
+      "updated_at": "2026-01-03T10:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 10,
+    "fields": {
+      "name": "Підземний Львів",
+      "description": "Секретний Львів, схований під землею. Підземелля Ратуші, льох Аптеки-музею та середньовічні тунелі під Домініканським собором.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "budget_min": "40.00",
+      "budget_max": "100.00",
+      "estimated_duration": 100,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-03T11:00:00Z",
+      "updated_at": "2026-01-03T11:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 11,
+    "fields": {
+      "name": "Ранковий Личаків",
+      "description": "Тиха прогулянка вранці по Личаківському парку та лісових стежках. Ідеально для медитації та самотнього відпочинку від міського шуму.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "parks",
+      "budget_min": "10.00",
+      "budget_max": "30.00",
+      "estimated_duration": 60,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-03T12:00:00Z",
+      "updated_at": "2026-01-03T12:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 12,
+    "fields": {
+      "name": "Вечірній центр",
+      "description": "Романтична вечірня прогулянка Старим містом: підсвічена Ратуша, тераси ресторанів на площі Ринок і концерт у Оперному театрі.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "mixed",
+      "budget_min": "100.00",
+      "budget_max": "250.00",
+      "estimated_duration": 120,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-04T09:00:00Z",
+      "updated_at": "2026-01-04T09:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 13,
+    "fields": {
+      "name": "Галицька кухня",
+      "description": "Гастрономічний тур: Гасова Лампа, Криївка та Дім Легенд — три ресторани з автентичною галицькою атмосферою та смачними стравами.",
+      "city": "Lviv",
+      "mood": "calm",
+      "category": "cafes",
+      "budget_min": "60.00",
+      "budget_max": "150.00",
+      "estimated_duration": 90,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-04T10:00:00Z",
+      "updated_at": "2026-01-04T10:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 14,
+    "fields": {
+      "name": "Великий зелений маршрут",
+      "description": "Найдовший пішохідний маршрут Львова: Залізна Вода, Знесіння, Шевченківський гай. Для тих, хто любить довгі прогулянки на природі.",
+      "city": "Lviv",
+      "mood": "adventurous",
+      "category": "parks",
+      "budget_min": "0.00",
+      "budget_max": "10.00",
+      "estimated_duration": 240,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-04T11:00:00Z",
+      "updated_at": "2026-01-04T11:00:00Z"
+    }
+  },
+  {
+    "model": "routes.route",
+    "pk": 15,
+    "fields": {
+      "name": "Модерн і Сецесія",
+      "description": "Архітектурний маршрут у стилі модерн: Будинок вчених, Театр ім. Заньковецької та унікальний Залізничний вокзал — шедеври 19-20 ст.",
+      "city": "Lviv",
+      "mood": "curious",
+      "category": "museums",
+      "budget_min": "20.00",
+      "budget_max": "50.00",
+      "estimated_duration": 120,
+      "avg_rating": "0.00",
+      "created_at": "2026-01-04T12:00:00Z",
+      "updated_at": "2026-01-04T12:00:00Z"
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 1,
+    "fields": {
+      "route": 1,
+      "name": "Ринкова площа",
+      "description": "Серце старого Львова — одна з найбільших ринкових площ України з Ратушею в центрі.",
+      "address": "площа Ринок, Львів",
+      "latitude": "49.841960",
+      "longitude": "24.031630",
+      "order": 1,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 2,
+    "fields": {
+      "route": 1,
+      "name": "Аптека-музей",
+      "description": "Найстаріша аптека Львова, заснована у 1735 році. Тут збереглись оригінальні меблі та обладнання 18 ст.",
+      "address": "площа Ринок, 2, Львів",
+      "latitude": "49.842000",
+      "longitude": "24.031300",
+      "order": 2,
+      "duration_at_stop": 25,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 3,
+    "fields": {
+      "route": 1,
+      "name": "Домініканський собор",
+      "description": "Величний бароковий собор 18 ст., нині музей історії релігії.",
+      "address": "площа Музейна, 1, Львів",
+      "latitude": "49.841900",
+      "longitude": "24.033700",
+      "order": 3,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 4,
+    "fields": {
+      "route": 1,
+      "name": "Вірменська церква",
+      "description": "Церква Успіння Пресвятої Богородиці — пам'ятка архітектури 14 ст. вірменської громади Львова.",
+      "address": "вул. Вірменська, 7, Львів",
+      "latitude": "49.841500",
+      "longitude": "24.034000",
+      "order": 4,
+      "duration_at_stop": 25,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 5,
+    "fields": {
+      "route": 2,
+      "name": "Парк Залізна Вода",
+      "description": "Мальовничий парк із ставком та джерелами мінеральної води на заході Львова.",
+      "address": "вул. Залізна Вода, Львів",
+      "latitude": "49.834400",
+      "longitude": "24.012400",
+      "order": 1,
+      "duration_at_stop": 50,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 6,
+    "fields": {
+      "route": 2,
+      "name": "Стрийський парк",
+      "description": "Один з найстаріших парків Львова — 55 га лісу, алей та фонтанів у центрі міста.",
+      "address": "вул. Стрийська, 202, Львів",
+      "latitude": "49.826100",
+      "longitude": "24.025800",
+      "order": 2,
+      "duration_at_stop": 70,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 7,
+    "fields": {
+      "route": 2,
+      "name": "Ботанічний сад",
+      "description": "Ботанічний сад Львівського університету з колекцією більше 3500 видів рослин.",
+      "address": "вул. Черемшини, 44, Львів",
+      "latitude": "49.825000",
+      "longitude": "24.023400",
+      "order": 3,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 8,
+    "fields": {
+      "route": 3,
+      "name": "Проспект Свободи",
+      "description": "Головна вулиця Львова — місце прогулянок, кав'ярень та стартова точка маршруту.",
+      "address": "проспект Свободи, Львів",
+      "latitude": "49.839800",
+      "longitude": "24.027000",
+      "order": 1,
+      "duration_at_stop": 15,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 9,
+    "fields": {
+      "route": 3,
+      "name": "Оперний театр",
+      "description": "Львівський національний академічний театр опери та балету — архітектурна перлина міста.",
+      "address": "проспект Свободи, 28, Львів",
+      "latitude": "49.844000",
+      "longitude": "24.025300",
+      "order": 2,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 10,
+    "fields": {
+      "route": 3,
+      "name": "Парк ім. Івана Франка",
+      "description": "Затишний парк з пам'ятником Іванові Франку навпроти Львівського університету.",
+      "address": "вул. Університетська, 1, Львів",
+      "latitude": "49.837100",
+      "longitude": "24.021900",
+      "order": 3,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 11,
+    "fields": {
+      "route": 3,
+      "name": "Арсенал",
+      "description": "Державний музей-заповідник «Арсенал» — унікальна колекція зброї та фортифікаційних споруд.",
+      "address": "вул. Підвальна, 5, Львів",
+      "latitude": "49.842600",
+      "longitude": "24.034500",
+      "order": 4,
+      "duration_at_stop": 55,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 12,
+    "fields": {
+      "route": 4,
+      "name": "Личаківський цвинтар",
+      "description": "Пантеон видатних українців — некрополь зі скульптурами та склепами 19-20 ст.",
+      "address": "вул. Мечникова, 33, Львів",
+      "latitude": "49.827200",
+      "longitude": "24.057800",
+      "order": 1,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 13,
+    "fields": {
+      "route": 4,
+      "name": "Парк Погулянка",
+      "description": "Тихий лісовий парк поруч із цвинтарем — чудове місце для спокійної прогулянки.",
+      "address": "вул. Погулянка, Львів",
+      "latitude": "49.829000",
+      "longitude": "24.054000",
+      "order": 2,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 14,
+    "fields": {
+      "route": 5,
+      "name": "НМ ім. Шептицького",
+      "description": "Найбільший художній музей України з колекцією ікон, живопису та декоративного мистецтва.",
+      "address": "проспект Свободи, 20, Львів",
+      "latitude": "49.839600",
+      "longitude": "24.025700",
+      "order": 1,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 15,
+    "fields": {
+      "route": 5,
+      "name": "Природничий музей",
+      "description": "Один з найбагатших природничих музеїв України з геологічними, ботанічними та зоологічними колекціями.",
+      "address": "вул. Театральна, 18, Львів",
+      "latitude": "49.843600",
+      "longitude": "24.024400",
+      "order": 2,
+      "duration_at_stop": 50,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 16,
+    "fields": {
+      "route": 5,
+      "name": "Музей етнографії",
+      "description": "Скарбниця традиційної культури Галичини — народний одяг, знаряддя праці та ритуальні предмети.",
+      "address": "проспект Свободи, 15, Львів",
+      "latitude": "49.841000",
+      "longitude": "24.023500",
+      "order": 3,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 17,
+    "fields": {
+      "route": 6,
+      "name": "Lviv Coffee Mine",
+      "description": "Знаменита кав'ярня-шахта — каву тут подають із «шахтарями» та інтерактивним шоу.",
+      "address": "вул. Валова, 6, Львів",
+      "latitude": "49.842200",
+      "longitude": "24.032500",
+      "order": 1,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 18,
+    "fields": {
+      "route": 6,
+      "name": "1 Кава",
+      "description": "Легендарна кав'ярня — за легендою, саме тут була продана перша чашка кави в Україні.",
+      "address": "вул. Вірменська, 8, Львів",
+      "latitude": "49.841900",
+      "longitude": "24.031500",
+      "order": 2,
+      "duration_at_stop": 25,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 19,
+    "fields": {
+      "route": 6,
+      "name": "Дзиґа",
+      "description": "Культова богемна кав'ярня-галерея на Вірменській — тут збираються митці та інтелектуали.",
+      "address": "вул. Вірменська, 35, Львів",
+      "latitude": "49.842300",
+      "longitude": "24.032000",
+      "order": 3,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 20,
+    "fields": {
+      "route": 6,
+      "name": "Black Honey",
+      "description": "Затишна спеціалті-кав'ярня з видом на проспект Свободи — ідеальне місце для фіналу кавового маршруту.",
+      "address": "вул. Театральна, 22, Львів",
+      "latitude": "49.840400",
+      "longitude": "24.026200",
+      "order": 4,
+      "duration_at_stop": 35,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 21,
+    "fields": {
+      "route": 7,
+      "name": "Підйом на Замкову гору",
+      "description": "Початок підйому на Замкову гору з боку вулиці Підзамче — живописна стежка через ліс.",
+      "address": "вул. Підзамче, Львів",
+      "latitude": "49.844400",
+      "longitude": "24.036300",
+      "order": 1,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 22,
+    "fields": {
+      "route": 7,
+      "name": "Вершина Замкової гори",
+      "description": "Панорамний вид на весь Львів з висоти 413 м — залишки Високого замку і телевежа.",
+      "address": "Замкова гора, Львів",
+      "latitude": "49.845000",
+      "longitude": "24.038500",
+      "order": 2,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 23,
+    "fields": {
+      "route": 7,
+      "name": "Цитадель",
+      "description": "Австрійська цитадель 19 ст. на пагорбі — нині готель, але фасад і укріплення збереглись.",
+      "address": "вул. Цитадельна, Львів",
+      "latitude": "49.833300",
+      "longitude": "24.027300",
+      "order": 3,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 24,
+    "fields": {
+      "route": 8,
+      "name": "Ринкова площа — стрітфуд",
+      "description": "Навколо площі Ринок — вулична їжа, медівники, галицькі пироги та свіжі соки.",
+      "address": "площа Ринок, Львів",
+      "latitude": "49.842000",
+      "longitude": "24.031600",
+      "order": 1,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 25,
+    "fields": {
+      "route": 8,
+      "name": "Краківський базар",
+      "description": "Старовинний ринок з домашньою їжею, сирами та ковбасами від місцевих фермерів.",
+      "address": "площа Краківська, Львів",
+      "latitude": "49.840800",
+      "longitude": "24.030200",
+      "order": 2,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 26,
+    "fields": {
+      "route": 8,
+      "name": "Вірменська вулиця",
+      "description": "Найромантичніша вулиця Львова — невеликі кав'ярні, крамнички та галицькі делікатеси.",
+      "address": "вул. Вірменська, Львів",
+      "latitude": "49.841500",
+      "longitude": "24.034000",
+      "order": 3,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 27,
+    "fields": {
+      "route": 9,
+      "name": "Стрийський парк — фонтан",
+      "description": "Головний вхід у Стрийський парк з великим фонтаном — популярне місце відпочинку.",
+      "address": "вул. Стрийська, 202, Львів",
+      "latitude": "49.826100",
+      "longitude": "24.025800",
+      "order": 1,
+      "duration_at_stop": 50,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 28,
+    "fields": {
+      "route": 9,
+      "name": "Ботанічний сад ЛНУ",
+      "description": "Ботанічний сад Львівського університету — 3500+ видів рослин, оранжереї та тропічні рослини.",
+      "address": "вул. Черемшини, 44, Львів",
+      "latitude": "49.825000",
+      "longitude": "24.023400",
+      "order": 2,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 29,
+    "fields": {
+      "route": 9,
+      "name": "Парк культури — алея",
+      "description": "Тиха алея у парку культури і відпочинку — хороша крапка для перепочинку наприкінці маршруту.",
+      "address": "вул. Стрийська, Львів",
+      "latitude": "49.824000",
+      "longitude": "24.022000",
+      "order": 3,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 30,
+    "fields": {
+      "route": 10,
+      "name": "Підземелля Ратуші",
+      "description": "Середньовічні підземні камери під Ратушею — місце для зберігання товарів та давній арсенал.",
+      "address": "площа Ринок, 1, Львів",
+      "latitude": "49.842000",
+      "longitude": "24.031600",
+      "order": 1,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 31,
+    "fields": {
+      "route": 10,
+      "name": "Льох Аптеки-музею",
+      "description": "Підземна частина Аптеки-музею — старовинні лабораторні реактори, зілля та аптечне обладнання 18 ст.",
+      "address": "площа Ринок, 2, Львів",
+      "latitude": "49.842000",
+      "longitude": "24.031300",
+      "order": 2,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 32,
+    "fields": {
+      "route": 10,
+      "name": "Підземний хід Домініканців",
+      "description": "Таємний середньовічний хід під Домініканським монастирем, відкритий для туристів.",
+      "address": "площа Музейна, 1, Львів",
+      "latitude": "49.841900",
+      "longitude": "24.033700",
+      "order": 3,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 33,
+    "fields": {
+      "route": 11,
+      "name": "Личаківський парк — вхід",
+      "description": "Вхід у Личаківський парк — тихий ліс у 20 хвилинах від центру.",
+      "address": "вул. Мечникова, Львів",
+      "latitude": "49.827200",
+      "longitude": "24.057800",
+      "order": 1,
+      "duration_at_stop": 15,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 34,
+    "fields": {
+      "route": 11,
+      "name": "Лісова стежка",
+      "description": "Тиха лісова стежка через Личаківський ліс — ідеальне місце для самотньої прогулянки.",
+      "address": "Личаків, Львів",
+      "latitude": "49.829000",
+      "longitude": "24.055000",
+      "order": 2,
+      "duration_at_stop": 25,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 35,
+    "fields": {
+      "route": 11,
+      "name": "Оглядовий майданчик",
+      "description": "Невеликий відкритий майданчик з видом на зелені пагорби східного Львова.",
+      "address": "Личаківський ліс, Львів",
+      "latitude": "49.830000",
+      "longitude": "24.052000",
+      "order": 3,
+      "duration_at_stop": 20,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 36,
+    "fields": {
+      "route": 12,
+      "name": "Площа Ринок вночі",
+      "description": "Підсвічена Ратуша і пожвавлені тераси ресторанів увечері — найромантичніший вигляд міста.",
+      "address": "площа Ринок, Львів",
+      "latitude": "49.842000",
+      "longitude": "24.031600",
+      "order": 1,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 37,
+    "fields": {
+      "route": 12,
+      "name": "Вілла Рома",
+      "description": "Затишний ресторан у центрі Львова з автентичною кухнею та теплою атмосферою.",
+      "address": "проспект Свободи, 5, Львів",
+      "latitude": "49.843800",
+      "longitude": "24.026000",
+      "order": 2,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 38,
+    "fields": {
+      "route": 12,
+      "name": "Оперний театр — вечірній",
+      "description": "Підсвічений Оперний театр вночі — один з найкрасивіших видів Львова. Можлива вечірня вистава.",
+      "address": "проспект Свободи, 28, Львів",
+      "latitude": "49.844000",
+      "longitude": "24.025300",
+      "order": 3,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 39,
+    "fields": {
+      "route": 13,
+      "name": "Гасова Лампа",
+      "description": "Ресторан у стилі 19 ст. з галицькими стравами та незвичайним освітленням від гасових ламп.",
+      "address": "вул. Вірменська, 20, Львів",
+      "latitude": "49.842200",
+      "longitude": "24.031400",
+      "order": 1,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 40,
+    "fields": {
+      "route": 13,
+      "name": "Криївка",
+      "description": "Ресторан-схованка у стилі УПА — автентична галицька кухня, медівниця та особлива атмосфера.",
+      "address": "площа Ринок, 14, Львів",
+      "latitude": "49.842500",
+      "longitude": "24.031800",
+      "order": 2,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 41,
+    "fields": {
+      "route": 13,
+      "name": "Дім Легенд",
+      "description": "Ресторан на даху з панорамним видом на Ринкову площу — ідеальне завершення гастрономічного маршруту.",
+      "address": "вул. Руська, 4, Львів",
+      "latitude": "49.841500",
+      "longitude": "24.033000",
+      "order": 3,
+      "duration_at_stop": 10,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 42,
+    "fields": {
+      "route": 14,
+      "name": "Парк Залізна Вода",
+      "description": "Початок великого зеленого маршруту — мінеральні джерела і ставки на заході Львова.",
+      "address": "вул. Залізна Вода, Львів",
+      "latitude": "49.834400",
+      "longitude": "24.012400",
+      "order": 1,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 43,
+    "fields": {
+      "route": 14,
+      "name": "Парк Знесіння",
+      "description": "Великий природний парк на пагорбах на схід від центру — ліси, стежки та тиша.",
+      "address": "вул. Знесіння, Львів",
+      "latitude": "49.846000",
+      "longitude": "24.042000",
+      "order": 2,
+      "duration_at_stop": 60,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 44,
+    "fields": {
+      "route": 14,
+      "name": "Шевченківський гай",
+      "description": "Музей народної архітектури просто неба — старовинні хати, вітряки та криниці серед лісу.",
+      "address": "вул. Чернеча Гора, Львів",
+      "latitude": "49.849000",
+      "longitude": "24.014800",
+      "order": 3,
+      "duration_at_stop": 90,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 45,
+    "fields": {
+      "route": 14,
+      "name": "Личаківський парк",
+      "description": "Фінальна точка великого маршруту — Личаківський ліс і спуск у місто.",
+      "address": "вул. Мечникова, Львів",
+      "latitude": "49.827200",
+      "longitude": "24.057800",
+      "order": 4,
+      "duration_at_stop": 50,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 46,
+    "fields": {
+      "route": 15,
+      "name": "Будинок вчених",
+      "description": "Шедевр львівського модерну — розкішний інтер'єр з ліпниною, вітражами та дерев'яним декором.",
+      "address": "проспект Свободи, 18, Львів",
+      "latitude": "49.837700",
+      "longitude": "24.024600",
+      "order": 1,
+      "duration_at_stop": 40,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 47,
+    "fields": {
+      "route": 15,
+      "name": "Театр ім. Заньковецької",
+      "description": "Розкішна будівля у стилі необароко — один з найгарніших театрів України, відкритий у 1842 р.",
+      "address": "вул. Лесі Українки, 1, Львів",
+      "latitude": "49.840800",
+      "longitude": "24.026500",
+      "order": 2,
+      "duration_at_stop": 30,
+      "image": null
+    }
+  },
+  {
+    "model": "routes.routepoint",
+    "pk": 48,
+    "fields": {
+      "route": 15,
+      "name": "Залізничний вокзал",
+      "description": "Архітектурна перлина — Львівський вокзал 1904 р. у стилі ар-нуво, найкрасивіший вокзал України.",
+      "address": "площа Двірцева, 1, Львів",
+      "latitude": "49.839600",
+      "longitude": "24.018400",
+      "order": 3,
+      "duration_at_stop": 50,
+      "image": null
+    }
+  }
+]

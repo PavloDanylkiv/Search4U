@@ -9,10 +9,19 @@ class Route(models.Model):
         ADVENTUROUS = "adventurous", "Adventurous"
         CURIOUS = "curious", "Curious"
 
+    class Category(models.TextChoices):
+        PARKS = "parks", "Parks"
+        MUSEUMS = "museums", "Museums"
+        CAFES = "cafes", "Cafes"
+        MIXED = "mixed", "Mixed"
+
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     city = models.CharField(max_length=100, db_index=True)
     mood = models.CharField(max_length=20, choices=Mood.choices, db_index=True)
+    category = models.CharField(
+        max_length=20, choices=Category.choices, blank=True, default="mixed"
+    )
     budget_min = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     budget_max = models.DecimalField(max_digits=10, decimal_places=2)
     estimated_duration = models.PositiveIntegerField(help_text="Duration in minutes")

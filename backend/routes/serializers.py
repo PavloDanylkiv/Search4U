@@ -29,6 +29,7 @@ class RouteListSerializer(serializers.ModelSerializer):
     rating_count = serializers.SerializerMethodField()
     is_saved = serializers.SerializerMethodField()
     is_favorite = serializers.SerializerMethodField()
+    first_point = serializers.SerializerMethodField()
 
     class Meta:
         model = Route
@@ -37,6 +38,7 @@ class RouteListSerializer(serializers.ModelSerializer):
             "name",
             "city",
             "mood",
+            "category",
             "budget_min",
             "budget_max",
             "estimated_duration",
@@ -45,6 +47,7 @@ class RouteListSerializer(serializers.ModelSerializer):
             "cover_image",
             "is_saved",
             "is_favorite",
+            "first_point",
         )
 
     def get_cover_image(self, obj):
@@ -70,6 +73,12 @@ class RouteListSerializer(serializers.ModelSerializer):
     def get_rating_count(self, obj):
         return obj.ratings.count()
 
+    def get_first_point(self, obj):
+        pt = obj.points.order_by("order").first()
+        if pt:
+            return {"latitude": str(pt.latitude), "longitude": str(pt.longitude)}
+        return None
+
 
 class RouteDetailSerializer(RouteListSerializer):
     images = RouteImageSerializer(many=True, read_only=True)
@@ -89,6 +98,7 @@ class UserRouteSerializer(serializers.ModelSerializer):
     route_id = serializers.PrimaryKeyRelatedField(
         queryset=Route.objects.all(), source="route", write_only=True
     )
+    user_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = UserRoute
@@ -102,8 +112,15 @@ class UserRouteSerializer(serializers.ModelSerializer):
             "date_saved",
             "date_started",
             "date_completed",
+            "user_rating",
         )
         read_only_fields = ("id", "date_saved")
+
+    def get_user_rating(self, obj):
+        r = obj.route.ratings.filter(user=obj.user).first()
+        if r:
+            return {"id": r.id, "score": r.score, "comment": r.comment}
+        return None
 
 
 class RatingSerializer(serializers.ModelSerializer):

@@ -14,8 +14,8 @@ class RoutePointInline(admin.TabularInline):
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ("name", "city", "mood", "budget_min", "budget_max", "estimated_duration", "avg_rating")
-    list_filter = ("mood", "city")
+    list_display = ("name", "city", "mood", "category", "budget_min", "budget_max", "estimated_duration", "avg_rating")
+    list_filter = ("mood", "city", "category")
     search_fields = ("name", "city", "description")
     readonly_fields = ("avg_rating", "created_at", "updated_at")
     inlines = [RouteImageInline, RoutePointInline]

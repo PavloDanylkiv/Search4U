@@ -5,11 +5,27 @@ from .models import User
 
 class RegisterSerializer(BaseRegisterSerializer):
     username = None
-    first_name = serializers.CharField(required=False)
-    last_name = serializers.CharField(required=False)
+    first_name = serializers.CharField(required=False, allow_blank=True)
+    last_name = serializers.CharField(required=False, allow_blank=True)
+
+    def validate_email(self, email):
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        if User.objects.filter(email__iexact=email).exists():
+            raise serializers.ValidationError(
+                "A user is already registered with this e-mail address."
+            )
+        return email
 
     def get_cleaned_data(self):
         data = super().get_cleaned_data()
+        # username обов'язковий у моделі (blank=False), але реєстрація без нього —
+        # генеруємо унікальний username з email автоматично
+        if not data.get("username"):
+            import uuid
+            email = self.validated_data.get("email", "")
+            base = email.split("@")[0][:20]
+            data["username"] = f"{base}_{uuid.uuid4().hex[:6]}"
         data["first_name"] = self.validated_data.get("first_name", "")
         data["last_name"] = self.validated_data.get("last_name", "")
         return data
