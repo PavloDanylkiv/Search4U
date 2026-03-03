@@ -10,22 +10,28 @@ import FilterItem from '../components/FilterItem.jsx'
 import WeatherWidget from '../components/WeatherWidget.jsx'
 import './MainPage.css'
 
+const MOOD_API_MAP = {
+  'Спокійний':   'calm',
+  'Активний':    'adventurous',
+  'Пізнавальний':'curious',
+}
+
 const BUDGET_MAP = {
-  Low: { budget_max__lte: 50 },
-  Medium: { budget_max__lte: 200 },
-  High: { budget_max__gte: 200 },
+  'Низький':  { budget_max__lte: 50 },
+  'Середній': { budget_max__lte: 200 },
+  'Високий':  { budget_max__gte: 200 },
 }
 
 const TIME_MAP = {
-  '1 Hour': { duration__lte: 60 },    // 1 hour
-  'Half Day': { duration__lte: 240 }, // 4 hours
-  'Full Day': { duration__lte: 480 }, // 8 hours
-}                                     // sorry, no more options
+  '1 година':  { duration__lte: 60 },
+  'Пів дня':   { duration__lte: 240 },
+  'Весь день': { duration__lte: 480 },
+}
 
 const DESTINATION_MAP = {
-  Parks: { category: 'parks' },
-  Museums: { category: 'museums' },
-  Cafes: { category: 'cafes' },
+  'Парки':  { category: 'parks' },
+  'Музеї':  { category: 'museums' },
+  'Кафе':   { category: 'cafes' },
 }
 
 const DEFAULT_CENTER = [49.8397, 24.0297] // Lviv
@@ -201,7 +207,7 @@ export default function MainPage() {
     setSelectedRouteId(null)
 
     const filters = {}
-    if (selectedMood) filters.mood = selectedMood.toLowerCase()
+    if (selectedMood) filters.mood = MOOD_API_MAP[selectedMood]
     if (selectedBudget) Object.assign(filters, BUDGET_MAP[selectedBudget])
     if (selectedTime) Object.assign(filters, TIME_MAP[selectedTime])
     if (selectedDestination) Object.assign(filters, DESTINATION_MAP[selectedDestination])
@@ -421,12 +427,12 @@ export default function MainPage() {
         {sidebarOpen && <div className="filters-container">
           <FilterItem
             id="mood"
-            label="Mood"
+            label="Настрій"
             icon={<Briefcase size={18} />}
             isOpen={openSection === 'mood'}
             onToggle={() => toggleSection('mood')}
           >
-            {['Calm', 'Adventurous', 'Curious'].map((m) => (
+            {['Спокійний', 'Активний', 'Пізнавальний'].map((m) => (
               <div
                 key={m}
                 className={`mood-option${selectedMood === m ? ' active' : ''}`}
@@ -437,12 +443,12 @@ export default function MainPage() {
 
           <FilterItem
             id="budget"
-            label="Budget"
+            label="Бюджет"
             icon={<span style={{fontWeight:700,fontSize:15,lineHeight:1}}>₴</span>}
             isOpen={openSection === 'budget'}
             onToggle={() => toggleSection('budget')}
           >
-            {['Low', 'Medium', 'High'].map((b) => (
+            {['Низький', 'Середній', 'Високий'].map((b) => (
               <div
                 key={b}
                 className={`mood-option${selectedBudget === b ? ' active' : ''}`}
@@ -453,12 +459,12 @@ export default function MainPage() {
 
           <FilterItem
             id="time"
-            label="Time to spend"
+            label="Час"
             icon={<Hourglass size={18} />}
             isOpen={openSection === 'time'}
             onToggle={() => toggleSection('time')}
           >
-            {['1 Hour', 'Half Day', 'Full Day'].map((t) => (
+            {['1 година', 'Пів дня', 'Весь день'].map((t) => (
               <div
                 key={t}
                 className={`mood-option${selectedTime === t ? ' active' : ''}`}
@@ -469,12 +475,12 @@ export default function MainPage() {
 
           <FilterItem
             id="destination"
-            label="Destination"
+            label="Місце"
             icon={<MapPin size={18} />}
             isOpen={openSection === 'destination'}
             onToggle={() => toggleSection('destination')}
           >
-            {['Parks', 'Museums', 'Cafes'].map((d) => (
+            {['Парки', 'Музеї', 'Кафе'].map((d) => (
               <div
                 key={d}
                 className={`mood-option${selectedDestination === d ? ' active' : ''}`}
@@ -495,14 +501,14 @@ export default function MainPage() {
             onClick={handleFindPath}
             disabled={loading}
           >
-            {loading ? 'Searching…' : 'Find path'}
+            {loading ? 'Шукаємо…' : 'Знайти маршрут'}
           </button>
         </div>}
       </aside>
 
       {searched && (
         <div className="results-panel">
-          <h3>Routes {results.length > 0 ? `(${results.length})` : ''}</h3>
+          <h3>Маршрути {results.length > 0 ? `(${results.length})` : ''}</h3>
           {startPoint && results.length > 0 && (
             <p className="sort-hint">
               📍 {results[results.length - 1]?._distKm <= 3
@@ -510,9 +516,9 @@ export default function MainPage() {
                 : `${results.length} найближчих маршрутів`}
             </p>
           )}
-          {loading && <p className="loading-text">Loading…</p>}
+          {loading && <p className="loading-text">Завантаження…</p>}
           {!loading && results.length === 0 && (
-            <p className="loading-text">No routes found. Try different filters.</p>
+            <p className="loading-text">Маршрутів не знайдено. Спробуйте інші фільтри.</p>
           )}
           {results.map((route) => {
             const isSaved = savedRouteIds.has(route.id)
@@ -534,7 +540,7 @@ export default function MainPage() {
                   </div>
                 )}
                 <div className="route-card-meta">
-                  {route.estimated_duration} min · {route.budget_max ?? 0} грн
+                  {route.estimated_duration} хв · {route.budget_max ?? 0} грн
                   {route.avg_rating ? ` · ★ ${Number(route.avg_rating).toFixed(1)}` : ''}
                 </div>
                 <button

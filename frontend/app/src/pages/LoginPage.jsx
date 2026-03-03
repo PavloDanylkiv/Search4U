@@ -38,7 +38,7 @@ export default function LoginPage() {
       if (data?.non_field_errors) {
         setError(data.non_field_errors[0])
       } else {
-        setError('Invalid email or password.')
+        setError('Невірний email або пароль.')
       }
     } finally {
       setLoading(false)
@@ -52,7 +52,7 @@ export default function LoginPage() {
       await googleLogin(credentialResponse.credential)
       navigate('/')
     } catch {
-      setError('Google sign-in failed. Please try again.')
+      setError('Помилка входу через Google. Спробуйте ще раз.')
     } finally {
       setLoading(false)
     }
@@ -95,7 +95,7 @@ export default function LoginPage() {
         backgroundColor: '#ffffff',
       }}>
         <h1 style={{ fontSize: isMobile ? '32px' : '48px', color: '#1a2b3c', marginBottom: '10px' }}>
-          Sign In
+          Увійти
         </h1>
 
         {error && (
@@ -104,11 +104,11 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div>
-            <label style={labelStyle}>Email address</label>
+            <label style={labelStyle}>Електронна пошта</label>
             <input
               name="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Введіть email"
               value={form.email}
               onChange={handleChange}
               required
@@ -116,11 +116,11 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label style={labelStyle}>Password</label>
+            <label style={labelStyle}>Пароль</label>
             <input
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Пароль"
               value={form.password}
               onChange={handleChange}
               required
@@ -142,7 +142,7 @@ export default function LoginPage() {
               marginTop: '10px',
             }}
           >
-            {loading ? 'Signing in…' : 'Sign In'}
+            {loading ? 'Входимо…' : 'Увійти'}
           </button>
         </form>
 
@@ -154,7 +154,7 @@ export default function LoginPage() {
           margin: '24px 0 16px',
         }}>
           <div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
-          <span style={{ fontSize: '13px', color: '#9ca3af', whiteSpace: 'nowrap' }}>or continue with</span>
+          <span style={{ fontSize: '13px', color: '#9ca3af', whiteSpace: 'nowrap' }}>або через</span>
           <div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
         </div>
 
@@ -162,7 +162,7 @@ export default function LoginPage() {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
-            onError={() => setError('Google sign-in failed. Please try again.')}
+            onError={() => setError('Помилка входу через Google. Спробуйте ще раз.')}
             useOneTap={false}
             theme="outline"
             size="large"
@@ -173,9 +173,9 @@ export default function LoginPage() {
         </div>
 
         <p style={{ textAlign: 'center', marginTop: '20px', color: '#666', fontSize: '14px' }}>
-          Don't have an account?{' '}
+          Немає акаунту?{' '}
           <Link to="/signup" style={{ color: '#2d5a27', textDecoration: 'none', fontWeight: '600' }}>
-            Sign up
+            Зареєструватись
           </Link>
         </p>
       </div>

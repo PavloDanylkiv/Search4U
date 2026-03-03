@@ -1,4 +1,5 @@
 from decimal import Decimal
+from django.db.models import Sum
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from .models import User
@@ -21,23 +22,21 @@ class UserStatsView(generics.GenericAPIView):
         from routes.models import UserRoute
 
         user_routes = UserRoute.objects.filter(user=request.user)
-        completed = user_routes.filter(
+        completed_count = user_routes.filter(
             status=UserRoute.Status.COMPLETED
-        )
-        all_saved = user_routes.select_related("route")
+        ).count()
 
-        total_time = sum(
-            ur.route.estimated_duration for ur in all_saved
-        )
-        total_budget = sum(
-            ur.route.budget_max or Decimal("0") for ur in all_saved
+        # Агрегація на рівні БД — один запит замість ітерації по Python
+        agg = user_routes.aggregate(
+            total_time=Sum("route__estimated_duration"),
+            total_budget=Sum("route__budget_max"),
         )
 
         data = {
             "total_routes": user_routes.count(),
-            "completed_routes": completed.count(),
-            "total_time_minutes": total_time,
-            "total_budget": total_budget,
+            "completed_routes": completed_count,
+            "total_time_minutes": agg["total_time"] or 0,
+            "total_budget": agg["total_budget"] or Decimal("0"),
         }
         serializer = self.get_serializer(data)
         return Response(serializer.data)

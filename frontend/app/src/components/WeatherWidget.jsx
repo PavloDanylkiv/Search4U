@@ -17,13 +17,13 @@ export default function WeatherWidget({ city = 'Lviv' }) {
 
   if (loading) return (
     <div style={styles.widget}>
-      <span style={styles.loading}>⏳ Loading weather…</span>
+      <span style={styles.loading}>⏳ Завантаження погоди…</span>
     </div>
   )
 
   if (error || !data) return (
     <div style={styles.widget}>
-      <span style={styles.loading}>🌡️ Weather unavailable</span>
+      <span style={styles.loading}>🌡️ Погода недоступна</span>
     </div>
   )
 

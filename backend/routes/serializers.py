@@ -71,7 +71,8 @@ class RouteListSerializer(serializers.ModelSerializer):
         return ur.is_favorite if ur else False
 
     def get_rating_count(self, obj):
-        return obj.ratings.count()
+        # len() використовує prefetch cache, .count() робив би окремий SQL запит
+        return len(obj.ratings.all())
 
     def get_first_point(self, obj):
         pt = obj.points.order_by("order").first()

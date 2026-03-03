@@ -50,7 +50,7 @@ export default function PathTaken({ path }) {
     <tr>
       <td className="path-cell"><span className="cell-icon">◎</span>{name}</td>
       <td>{date}</td>
-      <td>{time} min</td>
+      <td>{time} хв</td>
       <td>₴{budget}</td>
       <td>
         <span

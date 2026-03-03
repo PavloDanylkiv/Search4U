@@ -117,30 +117,30 @@ export default function AccountPage() {
         </div>
         <div className="header-right">
           <button className="primary-btn" onClick={() => navigate('/')}>
-            Home Page
+            Головна
           </button>
           <button className="primary-btn" onClick={handleLogout}
             style={{ backgroundColor: '#666' }}>
-            Log out
+            Вийти
           </button>
         </div>
       </header>
 
       <section className="stats-grid">
         <div className="stat-card">
-          <div className="stat-header"><span>Total Paths</span></div>
+          <div className="stat-header"><span>Всього маршрутів</span></div>
           <div className="stat-value">
             {loading ? '…' : (stats?.total_routes ?? 0)}
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-header"><span>Total Time</span></div>
+          <div className="stat-header"><span>Загальний час</span></div>
           <div className="stat-value">
             {loading ? '…' : formatTime(stats?.total_time_minutes)}
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-header"><span>Total Budget</span></div>
+          <div className="stat-header"><span>Загальний бюджет</span></div>
           <div className="stat-value">
             {loading ? '…' : `₴${stats?.total_budget ?? 0}`}
           </div>
@@ -149,24 +149,24 @@ export default function AccountPage() {
 
       <section className="history-section">
         <div className="section-header">
-          <h2>Path History</h2>
-          <p className="subtitle">A complete record of all your paths and journeys</p>
+          <h2>Історія маршрутів</h2>
+          <p className="subtitle">Повний список ваших маршрутів і подорожей</p>
         </div>
 
         {loading ? (
-          <p style={{ color: '#888', fontSize: 14 }}>Loading…</p>
+          <p style={{ color: '#888', fontSize: 14 }}>Завантаження…</p>
         ) : pathes.length === 0 ? (
-          <p style={{ color: '#888', fontSize: 14 }}>No paths yet.</p>
+          <p style={{ color: '#888', fontSize: 14 }}>Ще немає маршрутів.</p>
         ) : (
           <table className="history-table">
             <thead>
               <tr>
-                <th>Path</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Budget</th>
-                <th>Review</th>
-                <th>Comment</th>
+                <th>Маршрут</th>
+                <th>Дата</th>
+                <th>Час</th>
+                <th>Бюджет</th>
+                <th>Оцінка</th>
+                <th>Коментар</th>
               </tr>
             </thead>
             <PathesList pathes={pathes} />
