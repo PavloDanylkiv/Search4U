@@ -327,7 +327,14 @@ export default function MainPage() {
     routeMarkersRef.current.forEach((m) => m.remove())
     routeMarkersRef.current = []
 
-    if (!newId) return
+    if (!newId) {
+      // Deselecting — show results markers again
+      markersRef.current.forEach((m) => m.setOpacity(1))
+      return
+    }
+
+    // Hide results markers so they don't clutter the selected route view
+    markersRef.current.forEach((m) => m.setOpacity(0))
 
     try {
       const res = await routesApi.getDetail(route.id)
