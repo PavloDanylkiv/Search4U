@@ -190,19 +190,20 @@ export default function MainPage() {
     if (polylineRef.current) { polylineRef.current.remove(); polylineRef.current = null }
     if (walkingLineRef.current) { walkingLineRef.current.remove(); walkingLineRef.current = null }
 
-    results.forEach((route) => {
-      const points = route.points ?? []
-      if (points.length > 0) {
-        points.forEach((pt, i) => {
-          const marker = L.marker([pt.latitude, pt.longitude])
-            .addTo(map)
-            .bindPopup(`<b>${route.name}</b><br>${pt.name ?? ''}`)
-          markersRef.current.push(marker)
-          if (i === 0 && results.indexOf(route) === 0) {
-            map.setView([pt.latitude, pt.longitude], DEFAULT_ZOOM)
-          }
-        })
-      }
+    // List endpoint returns first_point (one object), not full points array
+    results.forEach((route, idx) => {
+      const fp = route.first_point
+      if (!fp) return
+      const lat = parseFloat(fp.latitude)
+      const lng = parseFloat(fp.longitude)
+      if (isNaN(lat) || isNaN(lng)) return
+
+      const marker = L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(`<b>${route.name}</b>`)
+      markersRef.current.push(marker)
+
+      if (idx === 0) map.setView([lat, lng], DEFAULT_ZOOM)
     })
 
     const saved = new Set(results.filter((r) => r.is_saved).map((r) => r.id))
@@ -333,11 +334,13 @@ export default function MainPage() {
       const points = res.data.points ?? []
       if (points.length < 2) return
 
+      // Find nearest waypoint to the user's start position
       const entryIdx = startPoint
         ? nearestPointIdx(startPoint.lat, startPoint.lng, points)
         : 0
-      const safeIdx = entryIdx < points.length - 1 ? entryIdx : Math.max(0, points.length - 2)
+      const entryPt = points[entryIdx]
 
+      // ── Fetch / cache the FULL OSRM route (all waypoints, start-point-agnostic) ──
       const OSRM_CACHE_KEY = `osrm-${route.id}`
       let fullCoords = null
 
@@ -356,27 +359,13 @@ export default function MainPage() {
         } catch { /* офлайн */ }
 
         if (!fullCoords) {
+          // fallback: straight lines between waypoints
           fullCoords = points.map((pt) => [parseFloat(pt.latitude), parseFloat(pt.longitude)])
         }
       }
 
-      let coords = fullCoords
-      if (startPoint && fullCoords.length > 1) {
-        let minDist = Infinity
-        let nearestCoordIdx = 0
-        fullCoords.forEach(([lat, lng], i) => {
-          const d = distanceKm(startPoint.lat, startPoint.lng, lat, lng)
-          if (d < minDist) { minDist = d; nearestCoordIdx = i }
-        })
-        const sliceFrom = nearestCoordIdx < fullCoords.length - 1
-          ? nearestCoordIdx
-          : Math.max(0, fullCoords.length - 2)
-        coords = fullCoords.slice(sliceFrom)
-      }
-
-      const routeSlice = points.slice(safeIdx)
-
-      const polyline = L.polyline(coords, {
+      // Show the FULL route polyline (unsliced — user sees the complete route)
+      const polyline = L.polyline(fullCoords, {
         color: '#6366f1', weight: 4, opacity: 0.85, lineJoin: 'round',
       }).addTo(map)
       polylineRef.current = polyline
@@ -450,8 +439,8 @@ export default function MainPage() {
         routeMarkersRef.current.push(m)
       })
 
+      // ── Walking line: startPoint → nearest route waypoint (orange dashed) ──
       if (startPoint) {
-        const entryPt = routeSlice[0]
         const walkWaypoints = [
           { latitude: startPoint.lat,   longitude: startPoint.lng },
           { latitude: entryPt.latitude, longitude: entryPt.longitude },
