@@ -78,6 +78,24 @@ class RoutePoint(models.Model):
         return f"{self.order}. {self.name} — {self.route.name}"
 
 
+class RoutePointPhoto(models.Model):
+    """Фото до точки маршруту, завантажені користувачем."""
+    point = models.ForeignKey(RoutePoint, on_delete=models.CASCADE, related_name="user_photos")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="point_photos",
+    )
+    image = models.ImageField(upload_to="user_point_photos/")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.email} → {self.point.name}"
+
+
 class UserRoute(models.Model):
     class Status(models.TextChoices):
         PLANNED = "planned", "Planned"

@@ -316,16 +316,208 @@
   cursor: default;
 }
 
-/* Collapsed sidebar (бургер меню) */
+/* Collapsed sidebar — лише кнопка бургер-меню */
 .sidebar--collapsed {
-  width: 52px;
-  padding: 16px 14px;
+  width: auto;
+  height: auto;
+  padding: 12px 14px;
   overflow: hidden;
 }
+
 .sidebar--collapsed .sidebar-header {
   margin-bottom: 0;
 }
 
 .sidebar--collapsed .logo {
   display: none;
+}
+
+/* ── Theme toggle ───────────────────────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-text);
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+.theme-toggle:hover { color: var(--primary-text); }
+
+/* ── Locate me button ───────────────────────────────────────── */
+.locate-btn {
+  position: absolute;
+  bottom: 90px;
+  left: 12px;
+  z-index: 1000;
+  background: white;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.15s, color 0.15s;
+}
+.locate-btn:hover:not(:disabled) {
+  background: #f4f4f4;
+  color: #6366f1;
+}
+.locate-btn:disabled { cursor: default; opacity: 0.6; }
+
+/* ── Address search ─────────────────────────────────────────── */
+.address-search {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.address-search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon-inside {
+  position: absolute;
+  left: 9px;
+  color: #aaa;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.address-search-input {
+  width: 100%;
+  padding: 8px 10px 8px 30px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  background: #f9fafb;
+  color: var(--primary-text);
+  transition: border-color 0.15s;
+}
+.address-search-input:focus { border-color: #6366f1; }
+
+.address-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.address-dropdown-item {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.4;
+  font-family: 'Inter', sans-serif;
+}
+.address-dropdown-item:last-child { border-bottom: none; }
+.address-dropdown-item:hover {
+  background: #f5f5ff;
+  color: #4f46e5;
+}
+
+/* ── Dark theme ─────────────────────────────────────────────── */
+[data-theme="dark"] .app-container  { background-color: #1a1a2e; }
+
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .results-panel  {
+  background: #16213e;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] .logo           { color: #e5e5e5; }
+[data-theme="dark"] .menu-icon      { color: #aaa; }
+[data-theme="dark"] .theme-toggle   { color: #aaa; }
+[data-theme="dark"] .theme-toggle:hover { color: #e5e5e5; }
+
+[data-theme="dark"] .filter-header  { color: #e5e5e5; }
+[data-theme="dark"] .filter-icon    { color: #888; }
+[data-theme="dark"] .chevron        { color: #666; }
+
+[data-theme="dark"] .mood-option    { color: #aaa; }
+[data-theme="dark"] .mood-option:hover {
+  background: #0f3460;
+  color: #e5e5e5;
+}
+[data-theme="dark"] .mood-option.active {
+  background: #1a1a60;
+  color: #a5b4fc;
+  border-left-color: #6366f1;
+}
+
+[data-theme="dark"] .find-path-btn          { background-color: #6366f1; }
+[data-theme="dark"] .find-path-btn:hover    { background-color: #4f46e5; }
+
+[data-theme="dark"] .clear-start-btn        { color: #22c55e; }
+[data-theme="dark"] .clear-start-btn:hover  { background: #0f2a1a; }
+
+[data-theme="dark"] .results-panel h3       { color: #e5e5e5; }
+[data-theme="dark"] .route-card             { border-color: #1e2d50; }
+[data-theme="dark"] .route-card:hover       { background: #1b2e50; }
+[data-theme="dark"] .route-card--selected   { background: #1a1a60; border-color: #6366f1; }
+[data-theme="dark"] .route-card-name        { color: #e5e5e5; }
+[data-theme="dark"] .route-card-meta        { color: #aaa; }
+
+[data-theme="dark"] .user-profile  {
+  background: #16213e;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .user-name     { color: #e5e5e5; }
+[data-theme="dark"] .user-email    { color: #888; }
+
+[data-theme="dark"] .offline-btn   {
+  background: #16213e;
+  border-color: #1e2d50;
+  color: #ccc;
+}
+
+[data-theme="dark"] .locate-btn    {
+  background: #16213e;
+  border-color: rgba(255,255,255,0.2);
+  color: #aaa;
+}
+[data-theme="dark"] .locate-btn:hover:not(:disabled) {
+  background: #1b2e50;
+  color: #a5b4fc;
+}
+
+/* Address search dark */
+[data-theme="dark"] .address-search-input {
+  background: #0f1b2d;
+  border-color: #1e2d50;
+  color: #e5e5e5;
+}
+[data-theme="dark"] .address-search-input::placeholder { color: #666; }
+[data-theme="dark"] .address-search-input:focus { border-color: #6366f1; }
+[data-theme="dark"] .search-icon-inside { color: #666; }
+
+[data-theme="dark"] .address-dropdown {
+  background: #16213e;
+  border-color: #1e2d50;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .address-dropdown-item {
+  color: #ccc;
+  border-color: #1e2d50;
+}
+[data-theme="dark"] .address-dropdown-item:hover {
+  background: #1b2e50;
+  color: #a5b4fc;
 }

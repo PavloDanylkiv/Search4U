@@ -3,6 +3,7 @@ from .views import (
     RouteListView,
     RouteDetailView,
     RoutePointListView,
+    RoutePointPhotoView,
     UserRouteListCreateView,
     UserRouteDetailView,
     RatingListCreateView,
@@ -19,6 +20,8 @@ routes_urlpatterns = [
         RatingDetailView.as_view(),
         name="route-rating-detail",
     ),
+    # User-uploaded photos for route points
+    path("points/<int:point_pk>/photos/", RoutePointPhotoView.as_view(), name="point-photos"),
 ]
 
 user_routes_urlpatterns = [

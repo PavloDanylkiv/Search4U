@@ -45,7 +45,7 @@ export default function SignUpPage() {
         const messages = Object.values(data).flat().join(' ')
         setError(messages)
       } else {
-        setError('Registration failed. Please try again.')
+        setError('Помилка реєстрації. Спробуйте ще раз.')
       }
     } finally {
       setLoading(false)
@@ -59,7 +59,7 @@ export default function SignUpPage() {
       await googleLogin(credentialResponse.credential)
       navigate('/')
     } catch {
-      setError('Google sign-in failed. Please try again.')
+      setError('Помилка входу через Google. Спробуйте ще раз.')
     } finally {
       setLoading(false)
     }
@@ -102,7 +102,7 @@ export default function SignUpPage() {
         backgroundColor: '#ffffff',
       }}>
         <h1 style={{ fontSize: isMobile ? '32px' : '48px', color: '#1a2b3c', marginBottom: '10px' }}>
-          Get Started Now
+          Почніть зараз
         </h1>
 
         {error && (
@@ -111,11 +111,11 @@ export default function SignUpPage() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div>
-            <label style={labelStyle}>Name</label>
+            <label style={labelStyle}>Ім'я</label>
             <input
               name="name"
               type="text"
-              placeholder="Enter your name"
+              placeholder="Введіть ваше ім'я"
               value={form.name}
               onChange={handleChange}
               required
@@ -123,11 +123,11 @@ export default function SignUpPage() {
             />
           </div>
           <div>
-            <label style={labelStyle}>Email address</label>
+            <label style={labelStyle}>Електронна пошта</label>
             <input
               name="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Введіть email"
               value={form.email}
               onChange={handleChange}
               required
@@ -135,11 +135,11 @@ export default function SignUpPage() {
             />
           </div>
           <div>
-            <label style={labelStyle}>Password</label>
+            <label style={labelStyle}>Пароль</label>
             <input
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Пароль"
               value={form.password}
               onChange={handleChange}
               required
@@ -161,7 +161,7 @@ export default function SignUpPage() {
               marginTop: '10px',
             }}
           >
-            {loading ? 'Creating account…' : 'Sign Up'}
+            {loading ? 'Реєструємо…' : 'Зареєструватись'}
           </button>
         </form>
 
@@ -173,7 +173,7 @@ export default function SignUpPage() {
           margin: '24px 0 16px',
         }}>
           <div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
-          <span style={{ fontSize: '13px', color: '#9ca3af', whiteSpace: 'nowrap' }}>or continue with</span>
+          <span style={{ fontSize: '13px', color: '#9ca3af', whiteSpace: 'nowrap' }}>або через</span>
           <div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
         </div>
 
@@ -181,7 +181,7 @@ export default function SignUpPage() {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
-            onError={() => setError('Google sign-in failed. Please try again.')}
+            onError={() => setError('Помилка входу через Google. Спробуйте ще раз.')}
             useOneTap={false}
             theme="outline"
             size="large"
@@ -192,9 +192,9 @@ export default function SignUpPage() {
         </div>
 
         <p style={{ textAlign: 'center', marginTop: '20px', color: '#666', fontSize: '14px' }}>
-          Have an account?{' '}
+          Вже є акаунт?{' '}
           <Link to="/login" style={{ color: '#2d5a27', textDecoration: 'none', fontWeight: '600' }}>
-            Sign in
+            Увійти
           </Link>
         </p>
       </div>
