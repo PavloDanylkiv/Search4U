@@ -115,13 +115,13 @@ npm run dev
 
 | Змінна | Обов'язкова | Опис |
 |--------|------------|------|
-| `SECRET_KEY` | ✅ | Django secret key |
-| `DEBUG` | ✅ | `True` для розробки, `False` для продакшну |
-| `ALLOWED_HOSTS` | ✅ | Дозволені хости (через кому) |
-| `CORS_ALLOWED_ORIGINS` | ✅ | Дозволені origins для CORS |
-| `OPENWEATHER_API_KEY` | ➖ | API ключ для погоди |
-| `GOOGLE_CLIENT_ID` | ➖ | Google OAuth Client ID |
-| `GOOGLE_CLIENT_SECRET` | ➖ | Google OAuth Client Secret |
+| `SECRET_KEY` | + | Django secret key |
+| `DEBUG` | + | `True` для розробки, `False` для продакшну |
+| `ALLOWED_HOSTS` | + | Дозволені хости (через кому) |
+| `CORS_ALLOWED_ORIGINS` | + | Дозволені origins для CORS |
+| `OPENWEATHER_API_KEY` | - | API ключ для погоди |
+| `GOOGLE_CLIENT_ID` | - | Google OAuth Client ID |
+| `GOOGLE_CLIENT_SECRET` | - | Google OAuth Client Secret |
 
 ## API Endpoints
 
