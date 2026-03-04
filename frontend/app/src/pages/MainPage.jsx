@@ -382,34 +382,42 @@ export default function MainPage() {
         const adminPhotoHtml = pt.image_url
           ? `<img src="${pt.image_url}" alt="${pt.name ?? ''}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;margin-top:6px;" />`
           : ''
-        const userPhotosHtml = (pt.user_photos ?? [])
-          .map((p) => `<img src="${p.image_url}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;" />`)
-          .join('')
-        const popupHtml = `
-          <div style="font-family:sans-serif;max-width:190px;">
-            <b style="font-size:13px;">${pt.name ?? ''}</b>
-            ${pt.description ? `<br><span style="font-size:11px;color:#555;">${pt.description}</span>` : ''}
-            ${pt.duration_at_stop ? `<br><span style="font-size:11px;color:#888;">⏱ ${pt.duration_at_stop} хв</span>` : ''}
-            ${adminPhotoHtml}
-            <div id="pt-photos-${pt.id}" style="display:flex;flex-direction:column;gap:4px;margin-top:${userPhotosHtml ? '4px' : '0'};">
-              ${userPhotosHtml}
-            </div>
-            <label style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;cursor:pointer;font-size:11px;color:#6366f1;font-weight:500;user-select:none;">
-              📷 Додати фото
-              <input type="file" accept="image/*" id="pt-upload-${pt.id}" style="display:none;" />
-            </label>
-            <div id="pt-status-${pt.id}" style="font-size:11px;color:#888;min-height:14px;margin-top:2px;"></div>
-          </div>`
+
+        // Mutable local array — зберігає фото між відкриттями попапу
+        const localPhotos = [...(pt.user_photos ?? [])]
+
+        const buildPopupHtml = () => {
+          const userPhotosHtml = localPhotos
+            .map((p) => `<img src="${p.image_url}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;" />`)
+            .join('')
+          return `
+            <div style="font-family:sans-serif;max-width:190px;">
+              <b style="font-size:13px;">${pt.name ?? ''}</b>
+              ${pt.description ? `<br><span style="font-size:11px;color:#555;">${pt.description}</span>` : ''}
+              ${pt.duration_at_stop ? `<br><span style="font-size:11px;color:#888;">⏱ ${pt.duration_at_stop} хв</span>` : ''}
+              ${adminPhotoHtml}
+              <div id="pt-photos-${pt.id}" style="display:flex;flex-direction:column;gap:4px;margin-top:${userPhotosHtml ? '4px' : '0'};">
+                ${userPhotosHtml}
+              </div>
+              <label style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;cursor:pointer;font-size:11px;color:#6366f1;font-weight:500;user-select:none;">
+                📷 Додати фото
+                <input type="file" accept="image/*" id="pt-upload-${pt.id}" style="display:none;" />
+              </label>
+              <div id="pt-status-${pt.id}" style="font-size:11px;color:#888;min-height:14px;margin-top:2px;"></div>
+            </div>`
+        }
 
         const m = L.marker([parseFloat(pt.latitude), parseFloat(pt.longitude)])
           .addTo(map)
-          .bindPopup(popupHtml, { maxWidth: 220 })
+          .bindPopup(buildPopupHtml(), { maxWidth: 220 })
 
-        // Attach upload handler once popup opens
+        // Кожного разу при відкритті — перебудовуємо попап з актуальними фото
+        // та вішаємо новий listener на свіжий input
         m.on('popupopen', () => {
+          m.setPopupContent(buildPopupHtml())
+
           const input = document.getElementById(`pt-upload-${pt.id}`)
-          if (!input || input._listenerAdded) return
-          input._listenerAdded = true
+          if (!input) return
 
           input.addEventListener('change', async (e) => {
             const file = e.target.files[0]
@@ -421,6 +429,9 @@ export default function MainPage() {
             formData.append('image', file)
             try {
               const res = await pointPhotos.upload(pt.id, formData)
+              // Зберігаємо в локальний масив — наступне відкриття вже покаже фото
+              localPhotos.push({ image_url: res.data.image_url })
+              // Відразу додаємо до поточного відкритого попапу
               if (photosEl) {
                 const img = document.createElement('img')
                 img.src = res.data.image_url
@@ -439,7 +450,7 @@ export default function MainPage() {
                 setTimeout(() => { statusEl.textContent = ''; statusEl.style.color = '#888' }, 2500)
               }
             }
-            e.target.value = '' // скидаємо, щоб можна було завантажити те саме фото ще раз
+            e.target.value = ''
           })
         })
 
