@@ -132,4 +132,13 @@ export const ratings = {
   update: (routeId, ratingId, data) => api.put(`/api/routes/${routeId}/ratings/${ratingId}/`, data),
 }
 
+// Route point user photos
+// Content-Type: undefined — axios сам виставить multipart/form-data + boundary для FormData
+export const pointPhotos = {
+  upload: (pointId, formData) =>
+    api.post(`/api/routes/points/${pointId}/photos/`, formData, {
+      headers: { 'Content-Type': undefined },
+    }),
+}
+
 export default api

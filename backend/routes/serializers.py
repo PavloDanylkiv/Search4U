@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Route, RouteImage, RoutePoint, UserRoute, Rating
+from .models import Route, RouteImage, RoutePoint, RoutePointPhoto, UserRoute, Rating
 
 
 class RouteImageSerializer(serializers.ModelSerializer):
@@ -8,7 +8,35 @@ class RouteImageSerializer(serializers.ModelSerializer):
         fields = ("id", "image", "is_cover", "order")
 
 
+class RoutePointPhotoSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    user_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = RoutePointPhoto
+        fields = ("id", "image", "image_url", "user_name", "created_at")
+        read_only_fields = ("id", "image_url", "user_name", "created_at")
+        extra_kwargs = {
+            "image": {"write_only": True},  # приймаємо при POST, не повертаємо назад
+        }
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(obj.image.url) if request else obj.image.url
+
+    def get_user_name(self, obj):
+        u = obj.user
+        if u.first_name:
+            last_initial = f" {u.last_name[0]}." if u.last_name else ""
+            return f"{u.first_name}{last_initial}"
+        # fallback: частина до @ без домену
+        return u.email.split("@")[0]
+
+
 class RoutePointSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    user_photos = RoutePointPhotoSerializer(many=True, read_only=True)
+
     class Meta:
         model = RoutePoint
         fields = (
@@ -20,8 +48,15 @@ class RoutePointSerializer(serializers.ModelSerializer):
             "longitude",
             "order",
             "duration_at_stop",
-            "image",
+            "image_url",
+            "user_photos",
         )
+
+    def get_image_url(self, obj):
+        if not obj.image:
+            return None
+        request = self.context.get("request")
+        return request.build_absolute_uri(obj.image.url) if request else obj.image.url
 
 
 class RouteListSerializer(serializers.ModelSerializer):
@@ -71,8 +106,11 @@ class RouteListSerializer(serializers.ModelSerializer):
         return ur.is_favorite if ur else False
 
     def get_rating_count(self, obj):
-        # len() використовує prefetch cache, .count() робив би окремий SQL запит
-        return len(obj.ratings.all())
+        # rating_count_annotated — анотується в RouteListView через Count('ratings'),
+        # що дає один COUNT-запит на всю колекцію замість N окремих SELECT
+        if hasattr(obj, "rating_count_annotated"):
+            return obj.rating_count_annotated
+        return obj.ratings.count()  # fallback (наприклад, RouteDetailView)
 
     def get_first_point(self, obj):
         pt = obj.points.order_by("order").first()
@@ -125,12 +163,19 @@ class UserRouteSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    user_email = serializers.EmailField(source="user.email", read_only=True)
+    user_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Rating
-        fields = ("id", "user_email", "score", "comment", "created_at")
-        read_only_fields = ("id", "user_email", "created_at")
+        fields = ("id", "user_name", "score", "comment", "created_at")
+        read_only_fields = ("id", "user_name", "created_at")
+
+    def get_user_name(self, obj):
+        u = obj.user
+        if u.first_name:
+            last_initial = f" {u.last_name[0]}." if u.last_name else ""
+            return f"{u.first_name}{last_initial}"
+        return u.email.split("@")[0]
 
     def validate(self, attrs):
         request = self.context["request"]

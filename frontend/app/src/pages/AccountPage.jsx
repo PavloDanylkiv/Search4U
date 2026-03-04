@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Sun, Moon } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
 import { user as userApi, userRoutes } from '../api/index.js'
 import PathesList from '../components/PathesList.jsx'
 import './AccountPage.css'
 
 export default function AccountPage() {
   const { currentUser, updateUser, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const [pathes,  setPathes]  = useState([])
   const [stats,   setStats]   = useState(null)
@@ -116,6 +119,9 @@ export default function AccountPage() {
           </div>
         </div>
         <div className="header-right">
+          <button className="theme-toggle-account" onClick={toggleTheme} title={theme === 'light' ? 'Темна тема' : 'Світла тема'}>
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
           <button className="primary-btn" onClick={() => navigate('/')}>
             Головна
           </button>

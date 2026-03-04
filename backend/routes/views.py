@@ -1,9 +1,11 @@
+from django.db.models import Count
 from rest_framework import generics, permissions
 from .filters import RouteFilter
-from .models import Route, RoutePoint, UserRoute, Rating
+from .models import Route, RoutePoint, RoutePointPhoto, UserRoute, Rating
 from .serializers import (
     RouteDetailSerializer,
     RouteListSerializer,
+    RoutePointPhotoSerializer,
     RoutePointSerializer,
     UserRouteSerializer,
     RatingSerializer,
@@ -19,7 +21,9 @@ class RouteListView(generics.ListAPIView):
     Search:  ?search=...
     Order:   ?ordering=avg_rating
     """
-    queryset = Route.objects.prefetch_related("images", "user_routes", "points")
+    queryset = Route.objects.prefetch_related("images", "user_routes", "points").annotate(
+        rating_count_annotated=Count("ratings", distinct=True)
+    )
     serializer_class = RouteListSerializer
     filterset_class = RouteFilter
     search_fields = ("name", "city", "description")
@@ -29,7 +33,10 @@ class RouteListView(generics.ListAPIView):
 
 class RouteDetailView(generics.RetrieveAPIView):
     """GET /api/routes/<id>/"""
-    queryset = Route.objects.prefetch_related("images", "points", "ratings", "user_routes")
+    queryset = Route.objects.prefetch_related(
+        "images", "points", "points__user_photos", "points__user_photos__user",
+        "ratings", "user_routes",
+    )
     serializer_class = RouteDetailSerializer
 
 
@@ -119,3 +126,18 @@ class RatingDetailView(generics.RetrieveUpdateDestroyAPIView):
         ctx = super().get_serializer_context()
         ctx["route"] = generics.get_object_or_404(Route, pk=self.kwargs["route_pk"])
         return ctx
+
+
+# ── Route Point Photos (user-uploaded) ───────────────────────────────────────
+
+class RoutePointPhotoView(generics.CreateAPIView):
+    """
+    POST /api/routes/points/<point_pk>/photos/
+    Завантажити фото до точки маршруту (multipart/form-data, поле: image)
+    """
+    serializer_class = RoutePointPhotoSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        point = generics.get_object_or_404(RoutePoint, pk=self.kwargs["point_pk"])
+        serializer.save(user=self.request.user, point=point)

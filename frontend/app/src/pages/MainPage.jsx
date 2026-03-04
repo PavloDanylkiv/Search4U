@@ -1,19 +1,20 @@
-import { useState, useEffect, useRef } from 'react' // standart react libriaries
-import { Link } from 'react-router-dom' // travel between pages
-import { Menu, Briefcase, Hourglass, MapPin } from 'lucide-react'
-import L from 'leaflet' // map
+import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Briefcase, Hourglass, MapPin, Sun, Moon, Navigation, Search } from 'lucide-react'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { tileLayerOffline, downloadTile, saveTile, getStorageLength } from 'leaflet.offline'
 import { useAuth } from '../context/AuthContext.jsx'
-import { routes as routesApi, userRoutes } from '../api/index.js'
+import { useTheme } from '../context/ThemeContext.jsx'
+import { routes as routesApi, userRoutes, pointPhotos } from '../api/index.js'
 import FilterItem from '../components/FilterItem.jsx'
 import WeatherWidget from '../components/WeatherWidget.jsx'
 import './MainPage.css'
 
 const MOOD_API_MAP = {
-  'Спокійний':   'calm',
-  'Активний':    'adventurous',
-  'Пізнавальний':'curious',
+  'Спокійний':    'calm',
+  'Активний':     'adventurous',
+  'Пізнавальний': 'curious',
 }
 
 const BUDGET_MAP = {
@@ -29,20 +30,18 @@ const TIME_MAP = {
 }
 
 const DESTINATION_MAP = {
-  'Парки':  { category: 'parks' },
-  'Музеї':  { category: 'museums' },
-  'Кафе':   { category: 'cafes' },
+  'Парки': { category: 'parks' },
+  'Музеї': { category: 'museums' },
+  'Кафе':  { category: 'cafes' },
 }
 
 const DEFAULT_CENTER = [49.8397, 24.0297] // Lviv
 const DEFAULT_ZOOM = 13
 
-// офлайн
 const LVIV_BOUNDS = L.latLngBounds([[49.77, 23.92], [49.90, 24.15]])
 const OFFLINE_ZOOMS = [12, 13, 14, 15]
 const TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
-// path creator
 async function fetchOsrmRoute(waypoints) {
   const coords = waypoints
     .map((pt) => `${parseFloat(pt.longitude)},${parseFloat(pt.latitude)}`)
@@ -58,7 +57,6 @@ async function fetchOsrmRoute(waypoints) {
   return null
 }
 
-// distance
 function distanceKm(lat1, lng1, lat2, lng2) {
   const R = 6371
   const dLat = (lat2 - lat1) * Math.PI / 180
@@ -68,10 +66,9 @@ function distanceKm(lat1, lng1, lat2, lng2) {
     Math.cos(lat1 * Math.PI / 180) *
     Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLng / 2) ** 2
-  return R * 2 * Math.asin(Math.sqrt(a)) // cool formula to calculate distances on Earth (if its not flat overall)
+  return R * 2 * Math.asin(Math.sqrt(a))
 }
 
-// find nearest point from path and returns it's index
 function nearestPointIdx(startLat, startLng, points) {
   let minDist = Infinity
   let minIdx = 0
@@ -85,15 +82,49 @@ function nearestPointIdx(startLat, startLng, points) {
   return minIdx
 }
 
+// Creates the green "S" start marker icon
+function makeStartIcon() {
+  return L.divIcon({
+    className: '',
+    html: `<div style="
+      background:#22c55e;color:#fff;font-weight:700;font-size:12px;
+      width:28px;height:28px;border-radius:50%;display:flex;
+      align-items:center;justify-content:center;
+      border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);">S</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+  })
+}
+
+// Reusable helper: place or replace the start marker on the map
+function placeStartMarker(map, lat, lng, startMarkerRef, setStartPoint) {
+  if (startMarkerRef.current) {
+    startMarkerRef.current.remove()
+    startMarkerRef.current = null
+  }
+  const marker = L.marker([lat, lng], { icon: makeStartIcon(), draggable: true })
+    .addTo(map)
+    .bindPopup('Початкова точка')
+  marker.on('dragend', (ev) => {
+    const pos = ev.target.getLatLng()
+    setStartPoint({ lat: pos.lat, lng: pos.lng })
+  })
+  startMarkerRef.current = marker
+  setStartPoint({ lat, lng })
+}
+
 export default function MainPage() {
   const { currentUser } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const mapRef = useRef(null)
   const leafletRef = useRef(null)
   const markersRef = useRef([])
+  const routeMarkersRef = useRef([])   // markers for selected route points
   const polylineRef = useRef(null)
   const startMarkerRef = useRef(null)
   const walkingLineRef = useRef(null)
   const tileLayerRef = useRef(null)
+  const searchTimerRef = useRef(null)
 
   const [openSection, setOpenSection] = useState('mood')
   const [selectedMood, setSelectedMood] = useState(null)
@@ -103,23 +134,29 @@ export default function MainPage() {
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
-  const [savedRouteIds,  setSavedRouteIds]  = useState(new Set())
+  const [savedRouteIds, setSavedRouteIds] = useState(new Set())
   const [selectedRouteId, setSelectedRouteId] = useState(null)
   const [savingId, setSavingId] = useState(null)
   const [startPoint, setStartPoint] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
-  // Офлайн
+  // Offline
   const [offlineStatus, setOfflineStatus] = useState('idle')
   const [offlineProgress, setOfflineProgress] = useState(0)
 
-  // Leaflet
+  // Feature 1 & 2
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [locating, setLocating] = useState(false)
+
+  // Leaflet init
   useEffect(() => {
     if (!mapRef.current || leafletRef.current) return
 
-    const map = L.map(mapRef.current).setView(DEFAULT_CENTER, DEFAULT_ZOOM)
+    const map = L.map(mapRef.current, { zoomControl: false }).setView(DEFAULT_CENTER, DEFAULT_ZOOM)
+    L.control.zoom({ position: 'bottomleft' }).addTo(map)
 
-    const offlineLayer = tileLayerOffline(TILE_URL, { // looks if map is already saved
+    const offlineLayer = tileLayerOffline(TILE_URL, {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18,
     })
@@ -131,36 +168,8 @@ export default function MainPage() {
       if (count > 0) setOfflineStatus('done')
     })
 
-    map.on('click', (e) => { // creates start marker
-      const { lat, lng } = e.latlng
-
-      if (startMarkerRef.current) {
-        startMarkerRef.current.remove()
-        startMarkerRef.current = null
-      }
-
-      const icon = L.divIcon({
-        className: '',
-        html: `<div style="
-          background:#22c55e;color:#fff;font-weight:700;font-size:12px;
-          width:28px;height:28px;border-radius:50%;display:flex;
-          align-items:center;justify-content:center;
-          border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);">S</div>`,
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
-      })
-
-      const marker = L.marker([lat, lng], { icon, draggable: true })
-        .addTo(map)
-        .bindPopup('Початкова точка')
-
-      marker.on('dragend', (ev) => {
-        const pos = ev.target.getLatLng()
-        setStartPoint({ lat: pos.lat, lng: pos.lng })
-      })
-
-      startMarkerRef.current = marker
-      setStartPoint({ lat, lng })
+    map.on('click', (e) => {
+      placeStartMarker(map, e.latlng.lat, e.latlng.lng, startMarkerRef, setStartPoint)
     })
 
     return () => {
@@ -169,13 +178,15 @@ export default function MainPage() {
     }
   }, [])
 
-  // marker update
+  // Clear markers when results change
   useEffect(() => {
     const map = leafletRef.current
     if (!map) return
 
     markersRef.current.forEach((m) => m.remove())
     markersRef.current = []
+    routeMarkersRef.current.forEach((m) => m.remove())
+    routeMarkersRef.current = []
     if (polylineRef.current) { polylineRef.current.remove(); polylineRef.current = null }
     if (walkingLineRef.current) { walkingLineRef.current.remove(); walkingLineRef.current = null }
 
@@ -200,6 +211,53 @@ export default function MainPage() {
 
   const toggleSection = (section) =>
     setOpenSection(openSection === section ? null : section)
+
+  // Feature 1: GPS geolocation
+  const handleLocateMe = () => {
+    if (!navigator.geolocation || locating) return
+    setLocating(true)
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const map = leafletRef.current
+        if (!map) { setLocating(false); return }
+        placeStartMarker(map, coords.latitude, coords.longitude, startMarkerRef, setStartPoint)
+        map.setView([coords.latitude, coords.longitude], 15)
+        setLocating(false)
+      },
+      () => setLocating(false),
+      { timeout: 10000 }
+    )
+  }
+
+  // Feature 2: Nominatim address search
+  const handleSearchChange = (e) => {
+    const q = e.target.value
+    setSearchQuery(q)
+    clearTimeout(searchTimerRef.current)
+    if (q.length < 3) { setSearchResults([]); return }
+    searchTimerRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5&countrycodes=ua&accept-language=uk`
+        )
+        const data = await res.json()
+        setSearchResults(data)
+      } catch {
+        setSearchResults([])
+      }
+    }, 400)
+  }
+
+  const handleSelectAddress = (result) => {
+    const lat = parseFloat(result.lat)
+    const lng = parseFloat(result.lon)
+    const map = leafletRef.current
+    if (!map) return
+    placeStartMarker(map, lat, lng, startMarkerRef, setStartPoint)
+    map.setView([lat, lng], 15)
+    setSearchQuery(result.display_name.split(',').slice(0, 2).join(',').trim())
+    setSearchResults([])
+  }
 
   const handleFindPath = async () => {
     setLoading(true)
@@ -264,6 +322,9 @@ export default function MainPage() {
 
     if (polylineRef.current) { polylineRef.current.remove(); polylineRef.current = null }
     if (walkingLineRef.current) { walkingLineRef.current.remove(); walkingLineRef.current = null }
+    // Clean up previous route point markers
+    routeMarkersRef.current.forEach((m) => m.remove())
+    routeMarkersRef.current = []
 
     if (!newId) return
 
@@ -283,16 +344,16 @@ export default function MainPage() {
       try {
         const cached = localStorage.getItem(OSRM_CACHE_KEY)
         if (cached) fullCoords = JSON.parse(cached)
-      } catch { /* ігноруємо помилку читання кешу */ }
+      } catch { /* ігноруємо */ }
 
       if (!fullCoords) {
         try {
-          const routed = await fetchOsrmRoute(points) // full path
+          const routed = await fetchOsrmRoute(points)
           if (routed) {
             fullCoords = routed
-            try { localStorage.setItem(OSRM_CACHE_KEY, JSON.stringify(routed)) } catch { /* storage full */ }
+            try { localStorage.setItem(OSRM_CACHE_KEY, JSON.stringify(routed)) } catch { /* full */ }
           }
-        } catch { /* OSRM недоступний (офлайн) */ }
+        } catch { /* офлайн */ }
 
         if (!fullCoords) {
           fullCoords = points.map((pt) => [parseFloat(pt.latitude), parseFloat(pt.longitude)])
@@ -313,13 +374,81 @@ export default function MainPage() {
         coords = fullCoords.slice(sliceFrom)
       }
 
-      // початок пунктирної лінії
       const routeSlice = points.slice(safeIdx)
 
       const polyline = L.polyline(coords, {
         color: '#6366f1', weight: 4, opacity: 0.85, lineJoin: 'round',
       }).addTo(map)
       polylineRef.current = polyline
+
+      // Feature 6: Add point markers with photo popups + user upload
+      points.forEach((pt) => {
+        const adminPhotoHtml = pt.image_url
+          ? `<img src="${pt.image_url}" alt="${pt.name ?? ''}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;margin-top:6px;" />`
+          : ''
+        const userPhotosHtml = (pt.user_photos ?? [])
+          .map((p) => `<img src="${p.image_url}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;" />`)
+          .join('')
+        const popupHtml = `
+          <div style="font-family:sans-serif;max-width:190px;">
+            <b style="font-size:13px;">${pt.name ?? ''}</b>
+            ${pt.description ? `<br><span style="font-size:11px;color:#555;">${pt.description}</span>` : ''}
+            ${pt.duration_at_stop ? `<br><span style="font-size:11px;color:#888;">⏱ ${pt.duration_at_stop} хв</span>` : ''}
+            ${adminPhotoHtml}
+            <div id="pt-photos-${pt.id}" style="display:flex;flex-direction:column;gap:4px;margin-top:${userPhotosHtml ? '4px' : '0'};">
+              ${userPhotosHtml}
+            </div>
+            <label style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;cursor:pointer;font-size:11px;color:#6366f1;font-weight:500;user-select:none;">
+              📷 Додати фото
+              <input type="file" accept="image/*" id="pt-upload-${pt.id}" style="display:none;" />
+            </label>
+            <div id="pt-status-${pt.id}" style="font-size:11px;color:#888;min-height:14px;margin-top:2px;"></div>
+          </div>`
+
+        const m = L.marker([parseFloat(pt.latitude), parseFloat(pt.longitude)])
+          .addTo(map)
+          .bindPopup(popupHtml, { maxWidth: 220 })
+
+        // Attach upload handler once popup opens
+        m.on('popupopen', () => {
+          const input = document.getElementById(`pt-upload-${pt.id}`)
+          if (!input || input._listenerAdded) return
+          input._listenerAdded = true
+
+          input.addEventListener('change', async (e) => {
+            const file = e.target.files[0]
+            if (!file) return
+            const statusEl = document.getElementById(`pt-status-${pt.id}`)
+            const photosEl = document.getElementById(`pt-photos-${pt.id}`)
+            if (statusEl) statusEl.textContent = 'Завантаження…'
+            const formData = new FormData()
+            formData.append('image', file)
+            try {
+              const res = await pointPhotos.upload(pt.id, formData)
+              if (photosEl) {
+                const img = document.createElement('img')
+                img.src = res.data.image_url
+                img.style.cssText = 'width:100%;height:90px;object-fit:cover;border-radius:6px;display:block;'
+                photosEl.appendChild(img)
+              }
+              if (statusEl) {
+                statusEl.style.color = '#22c55e'
+                statusEl.textContent = '✓ Фото додано!'
+                setTimeout(() => { statusEl.textContent = ''; statusEl.style.color = '#888' }, 2500)
+              }
+            } catch {
+              if (statusEl) {
+                statusEl.style.color = '#ef4444'
+                statusEl.textContent = '✗ Помилка завантаження'
+                setTimeout(() => { statusEl.textContent = ''; statusEl.style.color = '#888' }, 2500)
+              }
+            }
+            e.target.value = '' // скидаємо, щоб можна було завантажити те саме фото ще раз
+          })
+        })
+
+        routeMarkersRef.current.push(m)
+      })
 
       if (startPoint) {
         const entryPt = routeSlice[0]
@@ -346,7 +475,7 @@ export default function MainPage() {
 
       map.fitBounds(polyline.getBounds(), { padding: [40, 40] })
     } catch {
-      // нічого не робимо нуми
+      // ігноруємо
     }
   }
 
@@ -408,6 +537,16 @@ export default function MainPage() {
         <div className="map-hint">📍 Клікни на карту щоб встановити початкову точку</div>
       )}
 
+      {/* Feature 1: Locate me */}
+      <button
+        className="locate-btn"
+        onClick={handleLocateMe}
+        disabled={locating}
+        title="Визначити моє місцезнаходження"
+      >
+        <Navigation size={16} style={{ opacity: locating ? 0.4 : 1 }} />
+      </button>
+
       <button
         className="offline-btn"
         onClick={handleSaveOffline}
@@ -421,8 +560,48 @@ export default function MainPage() {
       <aside className={`sidebar${sidebarOpen ? '' : ' sidebar--collapsed'}`}>
         <div className="sidebar-header">
           <span className="logo">SEARCH4YOU</span>
-          <Menu size={20} className="menu-icon" onClick={() => setSidebarOpen(o => !o)} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {/* Feature 3: Theme toggle */}
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              title={theme === 'light' ? 'Темна тема' : 'Світла тема'}
+            >
+              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
+            <Menu size={20} className="menu-icon" onClick={() => setSidebarOpen(o => !o)} />
+          </div>
         </div>
+
+        {/* Feature 2: Address search */}
+        {sidebarOpen && (
+          <div className="address-search">
+            <div className="address-search-input-wrap">
+              <Search size={14} className="search-icon-inside" />
+              <input
+                className="address-search-input"
+                type="text"
+                placeholder="Пошук адреси…"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onBlur={() => setTimeout(() => setSearchResults([]), 150)}
+              />
+            </div>
+            {searchResults.length > 0 && (
+              <div className="address-dropdown">
+                {searchResults.map((r) => (
+                  <div
+                    key={r.place_id}
+                    className="address-dropdown-item"
+                    onMouseDown={() => handleSelectAddress(r)}
+                  >
+                    {r.display_name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {sidebarOpen && <div className="filters-container">
           <FilterItem
@@ -506,7 +685,7 @@ export default function MainPage() {
         </div>}
       </aside>
 
-      {searched && (
+      {searched && sidebarOpen && (
         <div className="results-panel">
           <h3>Маршрути {results.length > 0 ? `(${results.length})` : ''}</h3>
           {startPoint && results.length > 0 && (

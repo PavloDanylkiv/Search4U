@@ -201,3 +201,63 @@ h1 {
 .primary-btn:hover {
     background-color: #333;
 }
+
+/* Theme toggle on account page */
+.theme-toggle-account {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+    transition: background 0.15s, color 0.15s;
+}
+.theme-toggle-account:hover { background: #f0f0f0; color: #333; }
+
+/* ── Dark theme ─────────────────────────────────────────────── */
+[data-theme="dark"] .account-container {
+    background-color: #121212;
+    color: #e5e5e5;
+}
+
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .history-section {
+    background: #1e1e2e;
+    border-color: #2a2a4e;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .stat-header { color: #aaa; }
+[data-theme="dark"] .stat-value  { color: #e5e5e5; }
+
+[data-theme="dark"] .section-header h2 { color: #e5e5e5; }
+[data-theme="dark"] .subtitle          { color: #888; }
+
+[data-theme="dark"] h1 { color: #e5e5e5; }
+
+[data-theme="dark"] .history-table th {
+    color: #ccc;
+    border-color: #2a2a4e;
+}
+[data-theme="dark"] .history-table td {
+    color: #bbb;
+    border-color: #1e1e3e;
+}
+
+[data-theme="dark"] .cell-icon  { color: #555; }
+[data-theme="dark"] .path-cell  { color: #e5e5e5; }
+
+[data-theme="dark"] .primary-btn       { background-color: #4f46e5; }
+[data-theme="dark"] .primary-btn:hover { background-color: #6366f1; }
+
+[data-theme="dark"] .theme-toggle-account {
+    border-color: #2a2a4e;
+    color: #aaa;
+}
+[data-theme="dark"] .theme-toggle-account:hover { background: #1e1e3e; color: #e5e5e5; }
+
+[data-theme="dark"] .avatar-placeholder { background: #2a2a4e; }
